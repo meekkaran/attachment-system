@@ -72,7 +72,7 @@ if (isset($_GET['logout'])) {
                     $lecturer_id = $_SESSION['lecturer_id'];
                     $conn = mysqli_connect("localhost", "root", "", "dbsupervise");
                     $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student_id WHERE assigned.lecturer_id=$lecturer_id";
-                    echo var_dump($sql);
+                    // echo var_dump($sql);
                     $res = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($res)) {
                         $student_id = $row['student_id'];
