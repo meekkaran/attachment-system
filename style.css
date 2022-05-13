@@ -1,0 +1,207 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    text-transform: capitalize;
+  }
+  body {
+    /* min-height: 100vh; */
+    background: url(images/back.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  header {
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #800000;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    padding: 0px 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    position: relative;
+  }
+  header .logo {
+    font-weight: bolder;
+    font-size: 25px;
+    color: #fff;
+  }
+  header .navbar ul {
+    list-style: none;
+  }
+  header .navbar ul li {
+    position: relative;
+    float: left;
+  }
+  header .navbar ul li a {
+    font-size: 20px;
+    padding: 20px;
+    color: #fff;
+    display: block;
+  }
+  header .navbar ul li a:hover {
+    background: orange;
+    color: #fff;
+  }
+  header .navbar ul li ul {
+    position: absolute;
+    left: 0;
+    width: 250px;
+    background: #800000;
+    display: none;
+  }
+  header .navbar ul li ul li {
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  header .navbar ul li:focus-within > ul,
+  header .navbar ul li:hover > ul {
+    display: initial;
+  }
+  .maincontent{
+    /* width: 200px; */
+    height: 500PX;
+    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(images/back.jpg);
+    position: relative;
+    bottom: 54px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    left: 200px;
+    /* transform: translate(0%,-5%); */
+    border-radius: 10px;
+    padding: 25px;
+  }
+  footer{
+    position: relative;
+  }
+  
+  /* #menu-bar {
+    display: none;
+  }
+  header label {
+    font-size: 20px;
+    color: #fff;
+    cursor: Pointer;
+    display: none;
+  } */
+  
+  @media (max-width: 991px) {
+    header {
+      padding: 20px;
+    }
+    header label {
+      display: initial;
+    }
+    header .navbar {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #800000;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      display: none;
+    }
+    header .navbar ul li {
+      width: 100%;
+    }
+    header .navbar ul li ul {
+      position: relative;
+      width: 100%;
+    }
+    #menu-bar:checked ~ .navbar {
+      display: initial;
+    }
+  }
+  
+  /* styling the contents of the mainbodycontent */
+  .maincontent {
+    margin-top: 100px;
+    margin-left: 100px;
+    /* margin-bottom: 50px; */
+    width: 70%;
+    background-color: gray;
+    /* padding: 30px; */
+    border-radius: 10px;
+    color: #fff;
+  }
+  .maincontent .contentdetail {
+    left: 2%;
+  }
+  .maincontent h3 {
+    text-align: center;
+    padding: 10px;
+    color: orange;
+  }
+  .maincontent p {
+    font-size: 18px;
+  }
+  .maincontent .info1 {
+    padding: 10px;
+  }
+  .maincontent .info2 {
+    padding: 10px;
+  }
+  .maincontent .info3 {
+    padding: 10px;
+  }
+  .maincontent .info1 .info2 .info3:hover {
+    background-color: yellow;
+  }
+  
+  /* styling the button below the main page */
+  /* .btn {
+    padding: 2%;
+    left: 30%;
+    text-align: center;
+  } */
+  
+  /* .btn button {
+    background-color: #800000;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 18px;
+  } */
+  
+  /* styling the footer section */
+  footer {
+    box-sizing: border-box;
+    bottom: 0px;
+    width: 100%;
+    background: #800000;
+    color: #fff;
+    /* margin: 0;
+    padding: 0; */
+  }
+  
+  .main-content {
+    display: table;
+    table-layout: fixed;
+  }
+  .main-content .box {
+    display: table-cell;
+    padding: 10px 20px;
+  }
+  .box h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  .box .content {
+    margin: 20px 0 0 0;
+  }
+  
+  /* styling the name of a user on a dashboard */
+  /* .username{
+    margin-top: -20px;
+    color: whitesmoke;
+    float: right;
+    margin-right: 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    font-family: serif; } */
+  
