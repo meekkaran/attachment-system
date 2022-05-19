@@ -25,7 +25,6 @@ if (isset($_GET['logout'])) {
 </head>
 
 <body>
-
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
         <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
@@ -39,15 +38,15 @@ if (isset($_GET['logout'])) {
                     <li class="menu_items_list">HOME</li>
                 </a>
                 <a class="menu_items_link" href="assigned.php">
-                    <li class="menu_items_list">Assigned Students</li>
+                    <li class="menu_items_list" style="background-color:orange;padding-left:16px">Assigned Students</li>
                 </a>
-                <a class="menu_items_link" href="lecstudentlogbook.php">
-                    <li class="menu_items_list" style="background-color:orange;padding-left:16px">Students' Logbooks</li>
+                <a class="menu_items_link" href="assigned.php">
+                    <li class="menu_items_list">Students' Logbooks</li>
                 </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="lecturerlogin.php">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -57,7 +56,6 @@ if (isset($_GET['logout'])) {
     <div class="main">
         <h2>STUDENTS' LOGBOOKS</h2>
         <div class="article">
-
             <table class="table table-striped" id="mytable" border="2" style="background-color: #84ed86; color: #761a9b; margin: 0 auto;">
                 <tr>
                     <th><b>Full Name</b></th>
@@ -68,11 +66,20 @@ if (isset($_GET['logout'])) {
                     <th><b>Action</b></th>
                 </tr>
                 <tbody id="show_data">
+
                     <?php
+                    // $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+                    // $query = "SELECT * FROM lecturers WHERE role_id = {$_SESSION['role_id']}";
+                    // $query_student_name = mysqli_query($db, $query);
+                    // if (mysqli_num_rows($query_student_name) > 0) {
+                    //     $row = mysqli_fetch_assoc($query_student_name);
+                    //     $_SESSION['lecturer_id'] = $row['lecturer_id'];
+                    //     echo var_dump($_SESSION['lecturer_id']);
+                    // }
                     $lecturer_id = $_SESSION['lecturer_id'];
+                    echo var_dump($lecturer_id);
                     $conn = mysqli_connect("localhost", "root", "", "dbsupervise");
-                    $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student_id WHERE assigned.lecturer_id=$lecturer_id";
-                    // echo var_dump($sql);
+                    $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student_id WHERE assigned.lecturer_id={$_SESSION['lecturer_id']}";
                     $res = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($res)) {
                         $student_id = $row['student_id'];
@@ -96,7 +103,6 @@ if (isset($_GET['logout'])) {
             </table>
 
         </div>
-
     </div>
 
     <!-- footer section -->

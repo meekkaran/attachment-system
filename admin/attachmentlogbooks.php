@@ -50,6 +50,19 @@
         </div>
         <div class="main">
             <h2>Fixed sidebar menu html css</h2>
+            <!-- fetching reports  -->
+            <div classs="reports">
+                <form action="" method="GET">
+                    <div class="options">
+                        <input type="text" name="student_id" placeholder="Enter StudentID" value="<?php if (isset($_GET['student_id'])) {
+                                                                                                        echo $_GET['student_id'];
+                                                                                                    } ?>" />
+                        <input type="submit" name="search" value="SEARCH BY ID" class="bton">
+                        <input type="submit" value="reset" name="reset" class="bton">
+                        <button onclick="window.print();" class="bton">Print</button>
+                    </div>
+                </form>
+            </div>
             <table border="1" cellpadding="0">
                 <thead>
                     <tr>
@@ -61,27 +74,57 @@
                         <th>StudentId</th>
                     </tr>
                 </thead>
+                <!-- search student ID function -->
+                <?php
+                $conn = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+
+                if (!isset($_GET['search'])) {
+                    $query = "SELECT * FROM logbookdata";
+                    getData($query);
+                } elseif (isset($_GET['search'])) {
+                    $student_id = $_GET['student_id'];
+                    $sql = "SELECT * FROM logbookdata WHERE student_id='$student_id'";
+                    getData($sql);
+                } elseif (isset($_POST['reset'])) {
+                    $query = "SELECT * FROM logbookdata";
+                    getData($query);
+                } else {
+                    // <tr><td>No data found!</td></tr>
+
+                }
+                ?>
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM  logbookdata";
-                    $query_select_all = mysqli_query($conn, $query);
-                    while ($row = mysqli_fetch_assoc($query_select_all)) {
-                        $logbk_id = $row['logbk_id'];
-                        $week_id = $row['week_id'];
-                        $day_title = $row['day_title'];
-                        $day_notes = $row['day_notes'];
-                        $created_at = $row['created_at'];
-                        $student_id = $row['student_id'];
+                    function getData($sql)
+                    {
+                        $conn = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+                        $data = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($data) > 0) {
+                            while ($row = mysqli_fetch_array($data)) {
+                                $logbk_id = $row['logbk_id'];
+                                $week_id = $row['week_id'];
+                                $day_title = $row['day_title'];
+                                $day_notes = $row['day_notes'];
+                                $created_at = $row['created_at'];
+                                $student_id = $row['student_id'];
 
-                        echo "<tr>";
-                        echo "<td>{$logbk_id}</td>";
-                        echo "<td>{$week_id}</td>";
-                        echo "<td>{$day_title}</td>";
-                        echo "<td>{$day_notes}</td>";
-                        echo "<td>{$created_at}</td>";
-                        echo "<td>{$student_id}</td>";
-                        echo "</tr>";
+                                echo "<tr>";
+                                echo "<td>{$logbk_id}</td>";
+                                echo "<td>{$week_id}</td>";
+                                echo "<td>{$day_title}</td>";
+                                echo "<td>{$day_notes}</td>";
+                                echo "<td>{$created_at}</td>";
+                                echo "<td>{$student_id}</td>";
+                                echo "</tr>";
+                            }
+                        } else { ?>
+                            <tr>
+                                <td>No data found!</td>
+                            </tr>
+                    <?php
+                        }
                     }
+
                     ?>
                 </tbody>
             </table>

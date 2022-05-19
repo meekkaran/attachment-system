@@ -84,7 +84,7 @@ table th{
 }
 table td {
   font-size:1.1em;
-  padding:8px;
+  padding:5px;
   text-align: center;
 }
 .adminbtn{
@@ -92,7 +92,7 @@ table td {
     color: #fff;
     background-color:darkred;
     font-size: 1.1em;
-    padding: 4px 22px;
+    padding: 4px 17px;
     text-decoration: none;
 }
 .adminbtn:hover{
@@ -104,7 +104,7 @@ table td {
     color: #fff;
     background-color:#3c763d;
     font-size: 1.1em;
-    padding: 4px 22px;
+    padding: 4px 17px;
     text-decoration: none;
 }
 .adminbtn1:hover{
@@ -125,4 +125,19 @@ table td {
 .main .addbutton .add a{
     color: white;
     text-decoration: none !important;
+}
+/* styling teports div  */
+.reports{
+    background:  #d3d3d3;
+    border:1px solid black;
+    padding:10px;
+}
+select{
+    padding:6px 12px;
+}
+.reports .options .bton{
+    padding:6px 12px;
+    background-color: #800000;
+    color:#fff;
+    border-radius: 5px;
 }

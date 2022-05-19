@@ -50,6 +50,49 @@
         </div>
         <div class="main">
             <h2>Fixed sidebar menu html css</h2>
+            <!-- fetching reports  -->
+            <div class="reports">
+                <form action="#" method="post">
+                    <div class="options">
+                        <select name="filterChoice">
+                            <option selected="selected">select month</option>
+                            <option value='01'> JANUARY </option>
+                            <option value='02'> FEBRUARY </option>
+                            <option value='03'> MARCH </option>
+                            <option value='04'> APRIL </option>
+                            <option value='05'> MAY </option>
+                            <option value='06'> JUNE </option>
+                            <option value='07'> JULY </option>
+                            <option value='08'> AUGUST </option>
+                            <option value='09'> SEPTEMBER </option>
+                            <option value='10'> OCTOBER </option>
+                            <option value='11'> NOVEMBER </option>
+                            <option value='12'> DECEMBER </option>
+                        </select>
+                        <select name="year" id="year">
+                            <option select="selected">select year</option>
+                            <?php
+                            for ($i = 2018; $i <= date('Y'); $i++) {
+                                echo "<option>$i</option>";
+                                //given that variable i which has the year 2000
+                                //if i variable is less and equal to the current Year
+                                //echo the number with option output
+                                //++ is an increment operator and the loop will end at the current year
+                            }
+                            ?>
+                        </select>
+                        <select name="Allocated" id="Allocated">
+                            <option select="selected">Allocated</option>
+                            <option value="yes">YES</option>
+                            <option value="no">NO</option>
+                        </select>
+                        <input type="submit" value="filter" name="choice" class="bton">
+                        <input type="submit" value="reset" name="reset" class="bton">
+                        <button onclick="window.print();" class="bton">Print</button>
+                    </div>
+                </form>
+            </div>
+
             <div class="addbutton">
                 <button class="add"><a href="./add/addlecturer.php">Add Lecturer</a></button>
             </div>
@@ -67,33 +110,65 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
+                <?php
+                if (!isset($_POST['choice'])) {
+                    $query = "SELECT * FROM lecturers";
+                    getData($query);
+                } elseif (isset($_POST['choice'])) {
+                    $month = $_POST['filterChoice'];
+                    $year = $_POST['year'];
+                    $Allocated = $_POST['Allocated'];
+
+                    $sql = "SELECT * FROM lecturers WHERE YEAR(created_at)='$year' AND MONTH(created_at)='$month' AND Allocated='$Allocated'";
+                    getData($sql);
+                } elseif (isset($_POST['reset'])) {
+                    $query = "SELECT * FROM lecturers";
+                    getData($query);
+                } else {
+                    // <tr><td>No data found!</td></tr>
+
+                }
+                ?>
+
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM  lecturers";
-                    $query_select_all = mysqli_query($conn, $query);
-                    while ($row = mysqli_fetch_assoc($query_select_all)) {
-                        $lecturer_id = $row['lecturer_id'];
-                        $lecname = $row['lecname'];
-                        $role_id = $row['role_id'];
-                        $email = $row['email'];
-                        $phonenumber = $row['phonenumber'];
-                        $created_at = $row['created_at'];
-                        $Allocated = $row['Allocated'];
+                    function getData($sql)
+                    {
+                        $conn = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+                        $data = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($data) > 0) {
+                            while ($row = mysqli_fetch_array($data)) {
+                                $lecturer_id = $row['lecturer_id'];
+                                $lecname = $row['lecname'];
+                                $role_id = $row['role_id'];
+                                $email = $row['email'];
+                                $phonenumber = $row['phonenumber'];
+                                $created_at = $row['created_at'];
+                                $Allocated = $row['Allocated'];
 
-                        echo "<tr>";
-                        echo "<td>{$lecturer_id}</td>";
-                        echo "<td>{$lecname}</td>";
-                        echo "<td>{$role_id}</td>";
-                        echo "<td>{$email}</td>";
-                        echo "<td>{$phonenumber}</td>";
-                        echo "<td>{$created_at}</td>";
-                        echo "<td>{$Allocated}</td>";
+                                echo "<tr>";
+                                echo "<td>{$lecturer_id}</td>";
+                                echo "<td>{$lecname}</td>";
+                                echo "<td>{$role_id}</td>";
+                                echo "<td>{$email}</td>";
+                                echo "<td>{$phonenumber}</td>";
+                                echo "<td>{$created_at}</td>";
+                                echo "<td>{$Allocated}</td>";
 
-                        echo "<td><a href='update/updatelecturers.php?update={$lecturer_id}'class='adminbtn1'>Update</a></td>";
-                        echo "<td><a href='registeredsupervisors.php?delete={$lecturer_id}'class='adminbtn'>Delete</a></td>";
-                        echo "</tr>";
+                                echo "<td><a href='update/updatelecturers.php?update={$lecturer_id}'class='adminbtn1'>Update</a></td>";
+                                echo "<td><a href='registeredsupervisors.php?delete={$lecturer_id}'class='adminbtn'>Delete</a></td>";
+                                echo "</tr>";
+                            }
+                        } else { ?>
+
+                            <tr>
+                                <td>No data found!</td>
+                            </tr>
+                    <?php
+                        }
                     }
                     ?>
+
                     <!-- deleting records from the db -->
                     <?php
                     if (isset($_GET['delete'])) {

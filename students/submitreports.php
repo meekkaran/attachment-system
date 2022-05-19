@@ -20,7 +20,7 @@ if (isset($_GET['logout'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CIAMS</title>
+    <title>submitReports</title>
     <link rel="stylesheet" href="templates/css/style1.css" />
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="templates/css/reports.css" />
@@ -94,7 +94,7 @@ if (isset($_GET['logout'])) {
 
             $student_id = $_SESSION['student_id'];
             #sql query to insert into database
-            $sql = "INSERT into fileup(title,report,studentID,posted_at) VALUES('$title','$pname', '$student_id',now())";
+            $sql = "INSERT into fileup(title,report,student_id,posted_at) VALUES('$title','$pname', '$student_id',now())";
 
             if (mysqli_query($conn, $sql)) {
                 echo "File Successfully Uploaded";

@@ -33,7 +33,7 @@ if (isset($_GET['logout'])) {
     if (mysqli_num_rows($query_trainer_name) > 0) {
         $row = mysqli_fetch_row($query_trainer_name);
         $trainer = $row[0];
-        echo var_dump($trainer);
+        // echo var_dump($trainer);
     }
     //selecting week from table weeks
 

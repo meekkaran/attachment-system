@@ -97,6 +97,7 @@ if (isset($_POST['login_user'])) {
         // session_destroy();
         if (mysqli_num_rows($results) == 1) {
             $_SESSION['role_id'] = $role_id;
+            $_SESSION['lecturer_id'] = $lecturer_id;
             $_SESSION['lecturer_id'] = $user['lecturer_id'];
             $_SESSION['success'] = "You are now logged in";
             header('location: assigned.php');

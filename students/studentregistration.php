@@ -47,6 +47,23 @@
 			<input type="text" name="companyemail" value="">
 		</div>
 		<div class="input-group">
+			<label for="companyregion">Company Region:</label>
+			<select name="companyregion">
+				<option value="Central Region">Central Region</option>
+				<option value="Coast Region">Coast Region</option>
+				<option value="Eastern Region">Eastern Region</option>
+				<option value="Nairobi Region">Nairobi Region</option>
+				<option value="North Eastern Region">North Eastern Region</option>
+				<option value="Nyanza Region">Nyanza Region</option>
+				<option value="Rift Valley Region">Rift Valley Region</option>
+				<option value="Western Region">Western Region</option>
+			</select>
+		</div>
+		<div class="input-group">
+			<label>Starting Date</label>
+			<input type="date" name="startingdate" value="">
+		</div>
+		<div class="input-group">
 			<label>Password</label>
 			<input type="password" name="password_1">
 		</div>

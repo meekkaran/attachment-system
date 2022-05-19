@@ -20,6 +20,8 @@ if (isset($_POST['reg_user'])) {
     $companycontact = mysqli_real_escape_string($db, $_POST['companycontact']);
     $companyaddress = mysqli_real_escape_string($db, $_POST['companyaddress']);
     $companyemail = mysqli_real_escape_string($db, $_POST['companyemail']);
+    $companyregion = mysqli_real_escape_string($db, $_POST['companyregion']);
+    $startingdate = mysqli_real_escape_string($db, $_POST['startingdate']);
     $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
 
@@ -31,6 +33,7 @@ if (isset($_POST['reg_user'])) {
     $companyname = htmlspecialchars($companyname);
     $companyaddress = htmlspecialchars($companyaddress);
     $companyemail = htmlspecialchars($companyemail);
+    $companyregion = htmlspecialchars($companyregion);
 
 
     // form validation: ensure that the form is correctly filled ...
@@ -59,6 +62,12 @@ if (isset($_POST['reg_user'])) {
     if (empty($companyemail)) {
         array_push($errors, "companyemail is required");
     }
+    if (empty($companyregion)) {
+        array_push($errors, "companyregion is required");
+    }
+    if (empty($startingdate)) {
+        array_push($errors, "startingdate is required");
+    }
     if (empty($password_1)) {
         array_push($errors, "Password is required");
     }
@@ -86,8 +95,8 @@ if (isset($_POST['reg_user'])) {
     if (count($errors) == 0) {
         $password = md5($password_1); //encrypt the password before saving in the database
 
-        $query = "INSERT INTO students (fullname,admission_number, email, phone_number,company_name, company_Contact, company_address,company_email, password,created_at) 
-  			  VALUES('$fullname','$admissionnumber', '$email','$phonenumber','$companyname','$companycontact','$companyaddress','$companyemail', '$password',now())";
+        $query = "INSERT INTO students (fullname,admission_number, email, phone_number,company_name, company_Contact, company_address,company_email,company_region,startingdate, password,created_at) 
+  			  VALUES('$fullname','$admissionnumber', '$email','$phonenumber','$companyname','$companycontact','$companyaddress','$companyemail','$companyregion','$startingdate', '$password',now())";
         mysqli_query($db, $query);
         $_SESSION['admissionnumber'] = $admissionnumber;
         $_SESSION['success'] = "You are now logged in";

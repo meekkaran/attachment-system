@@ -50,6 +50,44 @@
         </div>
         <div class="main">
             <h2>Fixed sidebar menu html css</h2>
+            <!-- fetching reports  -->
+            <div class="reports">
+                <form action="#" method="post">
+                    <div class="options">
+                        <select name="filterChoice">
+                            <option selected="selected">select month</option>
+                            <option value='01'> JANUARY </option>
+                            <option value='02'> FEBRUARY </option>
+                            <option value='03'> MARCH </option>
+                            <option value='04'> APRIL </option>
+                            <option value='05'> MAY </option>
+                            <option value='06'> JUNE </option>
+                            <option value='07'> JULY </option>
+                            <option value='08'> AUGUST </option>
+                            <option value='09'> SEPTEMBER </option>
+                            <option value='10'> OCTOBER </option>
+                            <option value='11'> NOVEMBER </option>
+                            <option value='12'> DECEMBER </option>
+                        </select>
+                        <select name="year" id="year">
+                            <option select="selected">select year</option>
+                            <?php
+                            for ($i = 2018; $i <= date('Y'); $i++) {
+                                echo "<option>$i</option>";
+                                //given that variable i which has the year 2000
+                                //if i variable is less and equal to the current Year
+                                //echo the number with option output
+                                //++ is an increment operator and the loop will end at the current year
+                            }
+                            ?>
+                        </select>
+                        <input type="submit" value="filter" name="choice" class="bton">
+                        <input type="submit" value="reset" name="reset" class="bton">
+                        <button onclick="window.print();" class="bton">Print</button>
+                    </div>
+                </form>
+            </div>
+
             <table border="1" cellpadding="0">
                 <thead>
                     <tr>
@@ -57,28 +95,56 @@
                         <th>Title</th>
                         <th>Student ID</th>
                         <th>Report</th>
-
                         <th>posted_At</th>
                     </tr>
                 </thead>
+                <!-- reports php function -->
+                <?php
+                if (!isset($_POST['choice'])) {
+                    $query = "SELECT * FROM fileup";
+                    getData($query);
+                } elseif (isset($_POST['choice'])) {
+                    $month = $_POST['filterChoice'];
+                    $year = $_POST['year'];
+                    $sql = "SELECT * FROM fileup WHERE YEAR(posted_at)='$year' AND MONTH(posted_at)='$month'";
+                    getData($sql);
+                } elseif (isset($_POST['reset'])) {
+                    $query = "SELECT * FROM fileup";
+                    getData($query);
+                } else {
+                    // <tr><td>No data found!</td></tr>
+
+                }
+                ?>
+
                 <tbody>
                     <?php
-                    $query = "SELECT * FROM  fileup";
-                    $query_select_all = mysqli_query($conn, $query);
-                    while ($row = mysqli_fetch_assoc($query_select_all)) {
-                        $id = $row['id'];
-                        $title = $row['title'];
-                        $report = $row['report'];
-                        $student_id = $row['student_id'];
-                        $posted_at = $row['posted_at'];
+                    function getData($sql)
+                    {
+                        $conn = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+                        $data = mysqli_query($conn, $sql);
+                        if (mysqli_num_rows($data) > 0) {
+                            while ($row = mysqli_fetch_array($data)) {
+                                $id = $row['id'];
+                                $title = $row['title'];
+                                $student_id = $row['student_id'];
+                                $report = $row['report'];
+                                $posted_at = $row['posted_at'];
 
-                        echo "<tr>";
-                        echo "<td>{$id}</td>";
-                        echo "<td>{$title}</td>";
-                        echo "<td>{$student_id}</td>";
-                        echo "<td>{$report}</td>";
-                        echo "<td>{$posted_at}</td>";
-                        echo "</tr>";
+                                echo "<tr>";
+                                echo "<td>{$id}</td>";
+                                echo "<td>{$title}</td>";
+                                echo "<td>{$student_id}</td>";
+                                echo "<td>{$report}</td>";
+                                echo "<td>{$posted_at}</td>";
+                                echo "</tr>";
+                            }
+                        } else { ?>
+                            <tr>
+                                <td>No data found!</td>
+                            </tr>
+                    <?php
+                        }
                     }
                     ?>
                 </tbody>

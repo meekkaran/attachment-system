@@ -56,7 +56,7 @@ include "lec_student_logbook_function.php";
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="lecturerlogin.php">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
