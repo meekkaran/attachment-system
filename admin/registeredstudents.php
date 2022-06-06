@@ -139,7 +139,7 @@
                     <?php
                     function getData($sql)
                     {
-                        $conn = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $data = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($data) > 0) {
                             while ($row = mysqli_fetch_array($data)) {

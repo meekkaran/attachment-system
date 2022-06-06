@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['trainer_id'])) {
+if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: trainerlogin.php');
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['trainer_id']);
+    unset($_SESSION['user']);
     header("location: trainerlogin.php");
 }
 ?>
@@ -27,8 +27,8 @@ if (isset($_GET['logout'])) {
 
 <body>
     <?php
-    $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
-    $query = "SELECT * FROM trainers WHERE trainer_id = {$_SESSION['trainer_id']}";
+    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    $query = "SELECT * FROM trainers WHERE trainer_id = {$_SESSION['user']['trainer_id']}";
     $query_trainer_name = mysqli_query($db, $query);
     if (mysqli_num_rows($query_trainer_name) > 0) {
         $row = mysqli_fetch_assoc($query_trainer_name);
@@ -82,7 +82,7 @@ if (isset($_GET['logout'])) {
 
                     <?php
                     $trainer_id = $_SESSION['trainer_id'];
-                    $conn = mysqli_connect("localhost", "root", "", "dbsupervise");
+                    $conn = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
                     $sql = "SELECT * FROM assigned_trainer LEFT JOIN students ON students.admission_number=assigned_trainer.admission_number WHERE assigned_trainer.trainer_id=$trainer_id";
                     $res = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($res)) {

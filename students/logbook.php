@@ -2,13 +2,13 @@
 session_start();
 include "logbook_functions.php";
 
-if (!isset($_SESSION['admissionnumber'])) {
+if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: studentlogin.php');
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['admissionnumber']);
+    unset($_SESSION['user']);
     header("location: studentlogin.php");
 }
 ?>
@@ -27,22 +27,28 @@ if (isset($_GET['logout'])) {
 
 <body>
     <?php
-    $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
-    $query = "SELECT * FROM students WHERE admission_number = {$_SESSION['admissionnumber']}";
-    $query_student_name = mysqli_query($db, $query);
-    if (mysqli_num_rows($query_student_name) > 0) {
-        $row = mysqli_fetch_assoc($query_student_name);
-        $_SESSION['student_id'] = $row['student_id'];
-        // echo var_dump($_SESSION['student_id']);
-    }
     //selecting week from table weeks
+    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
     $query = "SELECT * FROM tbl_weeks";
     $select_all_weeks = mysqli_query($db, $query);
     ?>
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
-        <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
-            </span><span style="font-family:serif"><?php echo $row['fullname']; ?></span></div>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <strong><?php echo $_SESSION['user']['student_id']; ?></strong>
+
+            <small>
+                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['fullname']); ?>)</i>
+                <br>
+                <a href="home.php?logout='1'" style="color: red;">logout</a>
+                &nbsp; <a href="create_user.php"> + add user</a>
+            </small>
+
+        <?php endif ?>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
+                </span><span style="font-family:serif"><?php echo $_SESSION['user']['fullname']; ?></span></div>
+        <?php endif ?>
 
     </div>
     <div class="admincontent">
@@ -62,7 +68,7 @@ if (isset($_GET['logout'])) {
     </div>
 
     <div class="main">
-        <form method="post" action="logbook.php" >
+        <form method="post" action="logbook.php">
             <div class="nav" style="width: 90%;">
                 <div class="form-group">
                     <label for="weeks">WEEKS</label>
@@ -83,15 +89,15 @@ if (isset($_GET['logout'])) {
                     <button onclick="myFunction6()" type="button" class="btn">WEEK REMARK</button>
                 </div>
                 <div class="aside" style="width: 100%;">
-                <style>
-                    textarea{
-                        width: 90%;
-                    }
-                </style>
+                    <style>
+                        textarea {
+                            width: 90%;
+                        }
+                    </style>
                     <hr>
                     <label for="inputEmail4" style="color:black;">TODAY NOTES</label>
-                    <input  type="text" id="mon" name="mon_day" class="mon" value="MONDAY" placeholder="MONDAY" readonly />
-                    <textarea  type="text" id="bld" name="mon_notes" class="form-control bld" placeholder="MONDAY NOTES"></textarea>
+                    <input type="text" id="mon" name="mon_day" class="mon" value="MONDAY" placeholder="MONDAY" readonly />
+                    <textarea type="text" id="bld" name="mon_notes" class="form-control bld" placeholder="MONDAY NOTES"></textarea>
                     <input type="text" id="tue" name="tue_day" class="tue" value="TUESDAY" placeholder="TUESDAY" readonly />
                     <textarea type="text" id="cole" name="tue_notes" class="form-control cole" placeholder="TUESDAY NOTES"></textarea>
                     <input type="text" id="wed" name="wed_day" class="tue" value="WEDNESDAY" placeholder="WEDNESDAY" readonly />
@@ -134,12 +140,12 @@ if (isset($_GET['logout'])) {
                 <tbody id="show_data">
                     <?php
                     // if (isset($_SESSION['student_id'])) {
-                    $student_id = $_SESSION['student_id'];
-                    // echo var_dump($student_id);
+                    $student_id = $_SESSION['user']['student_id'];
+                    echo var_dump($student_id);
                     foreach ($select_all_weeks as $key => $t) {
                         echo "<tr>";
                         echo "<td>" . $t['week_title'] . "</td>";
-                        $conn = mysqli_connect("localhost", "root", "", "dbsupervise");
+                        $conn = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
                         $query12 = "SELECT * FROM logbookdata WHERE week_id='" . $t['week_id'] . "' AND student_id='" . $student_id . "' ";
                         $res = mysqli_query($conn, $query12);
                         $week_days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'REMARK', 'LEC_COMMENT', 'TRAINER_COMMENT');

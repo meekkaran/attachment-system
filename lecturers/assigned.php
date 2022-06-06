@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['role_id'])) {
+if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: lecturerlogin.php');
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['role_id']);
+    unset($_SESSION['user']);
     header("location: lecturerlogin.php");
 }
 ?>
@@ -27,8 +27,21 @@ if (isset($_GET['logout'])) {
 <body>
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
-        <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
-            </span><span style="font-family:serif"><?php echo $_SESSION['role_id']; ?></span></div>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <strong><?php echo $_SESSION['user']['lecturer_id']; ?></strong>
+
+            <small>
+                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['lecname']); ?>)</i>
+                <br>
+                <a href="home.php?logout='1'" style="color: red;">logout</a>
+                &nbsp; <a href="create_user.php"> + add user</a>
+            </small>
+
+        <?php endif ?>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
+                </span><span style="font-family:serif"><?php echo $_SESSION['user']['lecname']; ?></span></div>
+        <?php endif ?>
 
     </div>
     <div class="admincontent">
@@ -68,18 +81,21 @@ if (isset($_GET['logout'])) {
                 <tbody id="show_data">
 
                     <?php
-                    // $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
-                    // $query = "SELECT * FROM lecturers WHERE role_id = {$_SESSION['role_id']}";
-                    // $query_student_name = mysqli_query($db, $query);
-                    // if (mysqli_num_rows($query_student_name) > 0) {
-                    //     $row = mysqli_fetch_assoc($query_student_name);
-                    //     $_SESSION['lecturer_id'] = $row['lecturer_id'];
-                    //     echo var_dump($_SESSION['lecturer_id']);
+                    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                    if (isset($_SESSION['user'])) {
+                        $lecturer = $_SESSION['user']['lecturer_id'];
+                    }
+                    echo var_dump($lecturer);
+                    // $lecturer = "SELECT * FROM lecturers WHERE role_id = $lecturer";
+                    // $lecturer_query = mysqli_query($db, $lecturer);
+                    // while ($lecturer_id = mysqli_fetch_assoc($lecturer_query)) {
+
+                    //     $lec = $lecturer_id['lecturer_id'];
+                    //     // $lec = $lecturer_id['lecturer_id'];
                     // }
-                    $lecturer_id = $_SESSION['lecturer_id'];
-                    echo var_dump($lecturer_id);
-                    $conn = mysqli_connect("localhost", "root", "", "dbsupervise");
-                    $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student_id WHERE assigned.lecturer_id={$_SESSION['lecturer_id']}";
+
+                    $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
+                    $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student WHERE lecturer={$lecturer}";
                     $res = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($res)) {
                         $student_id = $row['student_id'];

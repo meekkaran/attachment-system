@@ -2,7 +2,7 @@
 // variable array $db that hold each parameters necessary to connect to the database
 $db['db_host'] = "localhost";
 $db['db_user'] = "root";
-$db['db_pass'] = "";
+$db['db_pass'] = "meek";
 $db['db_name'] = "dbsupervise";
 
 // foreach loop that loops through array $db to convert parameters to constants
@@ -16,3 +16,4 @@ $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 // if ($conn) {
 //     echo "we are connected";
 // }
+?>

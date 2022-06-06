@@ -3,13 +3,13 @@
 <html>
 
 <head>
-	<title>Registration system PHP and MySQL</title>
+	<title>StudentLogin</title>
 	<link rel="stylesheet" type="text/css" href="templates/css/style.css">
 </head>
 
 <body>
 	<div class="header">
-		<h2>Login</h2>
+		<h2>Student Login</h2>
 	</div>
 
 	<form method="post" action="studentlogin.php">
@@ -23,7 +23,7 @@
 			<input type="password" name="password">
 		</div>
 		<div class="input-group">
-			<button type="submit" class="btn" name="login_user">Login</button>
+			<button type="submit" class="btn" name="login_btn">Login</button>
 		</div>
 		<p>
 			Not yet a member? <a href="studentregistration.php">Sign up</a><br>

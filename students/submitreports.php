@@ -2,13 +2,13 @@
 session_start();
 include "includes/db.php";
 
-if (!isset($_SESSION['admissionnumber'])) {
+if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: studentlogin.php');
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['admissionnumber']);
+    unset($_SESSION['user']);
     header("location: studentlogin.php");
 }
 ?>
@@ -27,23 +27,24 @@ if (isset($_GET['logout'])) {
 </head>
 
 <body>
-    <?php
-    $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
-    $query = "SELECT * FROM students WHERE admission_number = {$_SESSION['admissionnumber']}";
-    $query_student_name = mysqli_query($db, $query);
-    if (mysqli_num_rows($query_student_name) > 0) {
-        $row = mysqli_fetch_assoc($query_student_name);
-        $_SESSION['student_id'] = $row['student_id'];
-        // echo var_dump($_SESSION['student_id']);
-    }
-    //selecting week from table weeks
-    $query = "SELECT * FROM tbl_weeks";
-    $select_all_weeks = mysqli_query($db, $query);
-    ?>
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
-        <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
-            </span><span style="font-family:serif"><?php echo $row['fullname']; ?></span></div>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <strong><?php echo $_SESSION['user']['student_id']; ?></strong>
+
+            <small>
+                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['fullname']); ?>)</i>
+                <br>
+                <a href="home.php?logout='1'" style="color: red;">logout</a>
+                &nbsp; <a href="create_user.php"> + add user</a>
+            </small>
+
+        <?php endif ?>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
+                </span><span style="font-family:serif"><?php echo $_SESSION['user']['fullname']; ?></span></div>
+        <?php endif ?>
+
     </div>
     <div class="admincontent">
         <div class="sidebar">
@@ -92,7 +93,7 @@ if (isset($_GET['logout'])) {
             #to move uploaded file to specific location
             // move_uploaded_file($tname, $uploads_dir . '/' . $pname);
 
-            $student_id = $_SESSION['student_id'];
+            $student_id = $_SESSION['user']['student_id'];
             #sql query to insert into database
             $sql = "INSERT into fileup(title,report,student_id,posted_at) VALUES('$title','$pname', '$student_id',now())";
 

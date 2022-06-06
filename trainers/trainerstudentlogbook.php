@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['trainer_id'])) {
+if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: trainerlogin.php');
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['trainer_id']);
+    unset($_SESSION['user']);
     header("location: trainerlogin.php");
 }
 include "trainer_logbook_functions.php";
@@ -26,21 +26,31 @@ include "trainer_logbook_functions.php";
 
 <body>
     <?php
-    $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
-    $query = "SELECT * FROM trainers WHERE trainer_id = {$_SESSION['trainer_id']}";
-    $query_lecturer_name = mysqli_query($db, $query);
-    $singleRow = mysqli_fetch_row($query_lecturer_name);
-    // echo var_dump($_SESSION['student_id']);
     //selecting week from table weeks
+    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
     $query = "SELECT * FROM tbl_weeks";
     $select_all_weeks = mysqli_query($db, $query);
     ?>
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
-        <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
-            </span><span style="font-family:serif"><?php echo $singleRow[1]; ?></span></div>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <strong><?php echo $_SESSION['user']['trainer_id']; ?></strong>
+
+            <small>
+                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['trainername']); ?>)</i>
+                <br>
+                <a href="home.php?logout='1'" style="color: red;">logout</a>
+                &nbsp; <a href="create_user.php"> + add user</a>
+            </small>
+
+        <?php endif ?>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
+                </span><span style="font-family:serif"><?php echo $_SESSION['user']['trainername']; ?></span></div>
+        <?php endif ?>
 
     </div>
+
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
@@ -122,7 +132,7 @@ include "trainer_logbook_functions.php";
                     foreach ($select_all_weeks as $key => $t) {
                         echo "<tr>";
                         echo "<td>" . $t['week_title'] . "</td>";
-                        $conn = mysqli_connect("localhost", "root", "", "dbsupervise");
+                        $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
                         $query12 = "SELECT * FROM logbookdata WHERE week_id='" . $t['week_id'] . "' AND student_id='" . $student_id . "' ";
                         $res = mysqli_query($conn, $query12);
                         $week_days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'LEC_COMMENT', 'TRAINER_COMMENT');
@@ -140,7 +150,7 @@ include "trainer_logbook_functions.php";
                         }
                         echo "</tr>";
                     }
-        
+
 
                     ?>
                 </tbody>

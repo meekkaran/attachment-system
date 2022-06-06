@@ -76,7 +76,7 @@
                 </thead>
                 <!-- search student ID function -->
                 <?php
-                $conn = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+                $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
 
                 if (!isset($_GET['search'])) {
                     $query = "SELECT * FROM logbookdata";
@@ -97,7 +97,7 @@
                     <?php
                     function getData($sql)
                     {
-                        $conn = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
                         $data = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($data) > 0) {
                             while ($row = mysqli_fetch_array($data)) {

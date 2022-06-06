@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Registration system PHP and MySQL</title>
+    <title>TrainerLogin</title>
     <link rel="stylesheet" type="text/css" href="templates/css/style.css">
 </head>
 
@@ -23,7 +23,7 @@
             <input type="password" name="password">
         </div>
         <div class="input-group">
-            <button type="submit" class="btn" name="login_user">Login</button>
+            <button type="submit" class="btn" name="login_btn">Login</button>
         </div>
         <hr>
         <p>

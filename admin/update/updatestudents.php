@@ -24,12 +24,13 @@ if (isset($_POST['submit'])) {
     $companyaddress = $_POST['company_address'];
     $companyemail = $_POST['company_email'];
     $companyregion = $_POST['company_region'];
+    $startingdate = $_POST['startingdate'];
     $password = $_POST['password'];
 
     $sql = "update `students` set student_id=$student_id,
     fullname='$fullname',admission_number= '$admissionnumber', email='$email',phone_number='$phonenumber',
     company_name= '$companyname',company_contact='$companycontact', company_address='$companyaddress',
-    company_email='$companyemail',company_region='$companyregion',password='$password' where student_id = $student_id";
+    company_email='$companyemail',company_region='$companyregion',startingdate='$startingdate',password='$password' where student_id = $student_id";
     $result = mysqli_query($conn, $sql);
     if ($result) {
         echo "Data updated carefully";
@@ -88,8 +89,21 @@ if (isset($_POST['submit'])) {
             <input type="text" name="company_email" value="<?php echo $companyemail ?>">
         </div>
         <div class="input-group">
-            <label>Company Region</label>
-            <input type="text" name="company_region" value="<?php echo $companyregion ?>">
+            <label for="companyregion">Company Region:</label>
+            <select name="companyregion">
+                <option value="Central Region">Central Region</option>
+                <option value="Coast Region">Coast Region</option>
+                <option value="Eastern Region">Eastern Region</option>
+                <option value="Nairobi Region">Nairobi Region</option>
+                <option value="North Eastern Region">North Eastern Region</option>
+                <option value="Nyanza Region">Nyanza Region</option>
+                <option value="Rift Valley Region">Rift Valley Region</option>
+                <option value="Western Region">Western Region</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Starting Date</label>
+            <input type="date" name="startingdate" value="<?php echo $startingdate ?>">
         </div>
         <div class="input-group">
             <label>Password</label>

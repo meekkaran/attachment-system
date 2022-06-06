@@ -4,7 +4,7 @@
 <html>
 
 <head>
-    <title>Registration</title>
+    <title>TrainerRegistration</title>
     <link rel="stylesheet" type="text/css" href="templates/css/style.css">
 </head>
 
@@ -17,7 +17,7 @@
         <?php include('includes/errors.php'); ?>
         <div class="input-group">
             <label>Trainer Full Name</label>
-            <input type="text" name="trainername" value="<?php echo $trainername; ?>">
+            <input type="text" name="trainername" value="">
         </div>
         <div class="input-group">
             <label>Email</label>
@@ -40,10 +40,10 @@
             <input type="password" name="password_2">
         </div>
         <div class="input-group">
-            <button type="submit" class="btn" name="reg_user">Register</button>
+            <button type="submit" class="btn" name="register_btn">Register</button>
         </div>
         <p>
-            Already a member? <a href="login.php">Sign in</a>
+            Already a member? <a href="trainerlogin.php">Sign in</a>
         </p>
     </form>
 </body>

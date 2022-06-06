@@ -1,9 +1,8 @@
 
-
     <?php
-    $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
-    if (isset($_SESSION['student_id'])) {
-        $student_id = $_SESSION['student_id'];
+    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    if (isset($_SESSION['user']['student_id'])) {
+        $student_id = $_SESSION['user']['student_id'];
 
         // monday input
         if (isset($_POST['create_post'])) {
@@ -79,7 +78,7 @@
             exit(0);
             // confirmQuery($create_post_query);
         }
-        // wednesday input
+        // saturday input
         if (isset($_POST['create_post5'])) {
             global $db, $student_id;
             $day_title = $_POST['sat_day'];

@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['trainer_id'])) {
+if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: trainerlogin.php');
 }
 if (isset($_GET['logout'])) {
     session_destroy();
-    unset($_SESSION['trainer_id']);
+    unset($_SESSION['user']);
     header("location: trainerlogin.php");
 }
 ?>
@@ -26,22 +26,23 @@ if (isset($_GET['logout'])) {
 </head>
 
 <body>
-    <?php
-    $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
-    $query = "SELECT * FROM trainers WHERE trainer_id = {$_SESSION['trainer_id']}";
-    $query_trainer_name = mysqli_query($db, $query);
-    if (mysqli_num_rows($query_trainer_name) > 0) {
-        $row = mysqli_fetch_row($query_trainer_name);
-        $trainer = $row[0];
-        // echo var_dump($trainer);
-    }
-    //selecting week from table weeks
-
-    ?>
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
-        <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
-            </span><span style="font-family:serif"><?php echo $row[1]; ?></span></div>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <strong><?php echo $_SESSION['user']['trainer_id']; ?></strong>
+
+            <small>
+                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['trainername']); ?>)</i>
+                <br>
+                <a href="home.php?logout='1'" style="color: red;">logout</a>
+                &nbsp; <a href="create_user.php"> + add user</a>
+            </small>
+
+        <?php endif ?>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
+                </span><span style="font-family:serif"><?php echo $_SESSION['user']['trainername']; ?></span></div>
+        <?php endif ?>
 
     </div>
     <div class="admincontent">
@@ -82,10 +83,10 @@ if (isset($_GET['logout'])) {
                 </form>
             </div>
             <?php
-            $db = mysqli_connect('localhost', 'root', '', 'dbsupervise');
+            $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
             if (isset($_POST['savechanges'])) {
                 $admissionnumber = $_POST['admission_number'];
-                $query = "INSERT INTO assigned_trainer( admission_number,trainer_id) VALUES({$admissionnumber},'{$_SESSION['trainer_id']}') ";
+                $query = "INSERT INTO assigned_trainer( admission_number,trainer_id) VALUES({$admissionnumber},'{$_SESSION['user']['trainer_id']}') ";
                 $create_post_query = mysqli_query($db, $query);
                 // confirmQuery($create_post_query);
                 if ($create_post_query) {

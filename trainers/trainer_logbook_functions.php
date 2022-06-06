@@ -1,7 +1,7 @@
 <?php
   if (isset($_POST['create_trainer_comment'])) {
     // global $conn;
-    $conn = mysqli_connect("localhost", "root", "", "dbsupervise");
+    $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
     $student_in = $_POST['students'];
     echo var_dump($student_in);
     $remark = $_POST['trainer_comment'];
@@ -15,6 +15,3 @@
     exit(0);
     // confirmQuery($create_post_query);
 }
-
-
-?>
