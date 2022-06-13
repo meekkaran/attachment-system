@@ -29,21 +29,10 @@
     background-color: black;
   }
   .article {
-    /* width: 80%; */
     float: left;
     height: fit-content;
   }
-  /*.cards*/
-  /*{*/
-  /*    display: table-cell;*/
-  /*    width: 200px;*/
-  /*    height: 60px;*/
-  /*    text-decoration: none;*/
-  /*    color: #f0e68c;*/
-  /*    vertical-align: middle;*/
-  /*    background-color: #00cc66;*/
-  /*    border-radius: 5px;*/
-  /*}*/
+
   .aside {
     width: 20%;
     float: left;

@@ -1,4 +1,4 @@
-<?php include('includes/server.php') ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -8,21 +8,20 @@
 </head>
 
 <body>
-	<div class="header">
+	<div class="heading">
 		<h2>Lecturer Login</h2>
 	</div>
 
-	<form method="post" action="lecturerlogin.php">
-		<?php include('includes/errors.php'); ?>
-		<div class="input-group">
+	<form method="post" id="leclogin" action="login.php" onSubmit="return validateForm()">
+		<div class="inputform">
 			<label>Role ID</label>
-			<input type="text" name="role_id">
+			<input type="text" id="role_id" name="role_id">
 		</div>
-		<div class="input-group">
+		<div class="inputform">
 			<label>Password</label>
-			<input type="password" name="password">
+			<input type="password" id="password" name="password">
 		</div>
-		<div class="input-group">
+		<div class="inputform">
 			<button type="submit" class="btn" name="login_btn">Login</button>
 		</div>
 		<p>
@@ -30,6 +29,27 @@
 			<a href="../index.php">HOME PAGE</a>
 		</p>
 	</form>
+	<script>
+		function validateForm() {
+			//validate role_id
+			//if role ID is empty
+			role_id = document.getElementById("role_id").value;
+			if (role_id == "" || role_id.length < 4) {
+				alert("Please enter your Role ID");
+				document.getElementById("role_id").focus();
+				return false;
+			}
+			//validate password
+			password = document.getElementById("password").value;
+			if (password == "" || password.length < 8) {
+				alert("Password should not be empty and it should have more than 8 characters");
+				document.getElementById("password").focus();
+				return false;
+			}
+
+		}
+	</script>
+
 </body>
 
 </html>

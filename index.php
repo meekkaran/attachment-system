@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home page</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,11 +8,9 @@
 <body>
     <header>
         <a href="#" class="logo">CIAMS</a>
-             <nav class="navbar">
+        <nav class="navbar">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
                 <li><a href="#">Our Portal +</a>
                     <ul>
                         <li><a href="students/studentlogin.php">Student</a></li>

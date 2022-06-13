@@ -1,11 +1,8 @@
 <?php include "./includes/db.php"; ?>
-<!DOCTYPE html>
-<html lang="en" class="bg-pink">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>CIAMS</title>
     <link rel="stylesheet" href="./templates/admin1.css" />
 </head>
@@ -49,7 +46,7 @@
             </ul>
         </div>
         <div class="main">
-            <h2>Fixed sidebar menu html css</h2>
+            <h2>Students' Reports</h2>
             <!-- fetching reports  -->
             <div class="reports">
                 <form action="#" method="post">

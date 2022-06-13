@@ -22,7 +22,6 @@ if (isset($_GET['logout'])) {
     <title>Trainer</title>
     <link rel="stylesheet" href="templates/css/style1.css" />
     <link rel="stylesheet" href="templates/css/logbookstyle.css" />
-    <link rel="stylesheet" href="templates/css/style.css" />
 </head>
 
 <body>
@@ -45,9 +44,6 @@ if (isset($_GET['logout'])) {
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-                <a class="menu_items_link" href="registeredstudents.php">
-                    <li class="menu_items_list">DASHBOARD</li>
-                </a>
                 <a class="menu_items_link" href="assignedtrainer.php">
                     <li class="menu_items_list">Add Student</li>
                 </a>
@@ -60,7 +56,7 @@ if (isset($_GET['logout'])) {
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="viewlogbook.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>

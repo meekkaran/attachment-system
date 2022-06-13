@@ -1,11 +1,8 @@
 <?php include "./includes/db.php"; ?>
-<!DOCTYPE html>
-<html lang="en" class="bg-pink">
+
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CIAMS</title>
     <link rel="stylesheet" href="./templates/admin1.css" />
 </head>
@@ -19,6 +16,9 @@
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
+                <a class="menu_items_link" href="dashboard.php">
+                    <li class="menu_items_list">Dashboard</li>
+                </a>
                 <a class="menu_items_link" href="registeredstudents.php">
                     <li class="menu_items_list">Registered Students</li>
                 </a>
@@ -46,7 +46,7 @@
             </ul>
         </div>
         <div class="main">
-            <h2>Fixed sidebar menu html css</h2>
+
             <table border="1" cellpadding="0">
                 <thead>
                     <tr>

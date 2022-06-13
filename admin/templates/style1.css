@@ -73,21 +73,17 @@
 }
 
 form{
-  /* background-color: black; */
-  top:30%;
-  left:30%;
-  position: absolute;
-  width: 50%;
+  top:20%;
+  left:40%;
+  width: 40%;
   height: fit-content;
   text-align: center;
-  clear: both;
   color: #000;
 }
 form label{
   display: block;
   text-align: left;
   margin: 3px;
-  /* margin-left: 40px; */
 }
 
 form .sel{
@@ -105,4 +101,10 @@ form .sel{
   color:#fff;
   border-radius: 5px;
   
+}
+.main .allocated {
+  padding-top: 50px;
+}
+.allocated h2{
+  text-align: center;
 }

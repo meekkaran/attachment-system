@@ -141,3 +141,15 @@ select{
     color:#fff;
     border-radius: 5px;
 }
+/* //styling the collumns for displaying number of users */
+.main .column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Stops the float property from affecting content after the columns */
+.main .columns:after {
+    content: "";
+    display: table;
+    clear: both;
+  }

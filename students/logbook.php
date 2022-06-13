@@ -1,5 +1,11 @@
 <?php
 session_start();
+//no one can access this page apart from the students /(security)
+if ($_SESSION['utype'] == 'student') {
+} else {
+    echo "<script>alert('You must login first')</script>";
+    echo "<script>location.href'studentlogin.php'</script>";
+}
 include "logbook_functions.php";
 
 if (!isset($_SESSION['user'])) {
@@ -13,13 +19,9 @@ if (isset($_GET['logout'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en" class="bg-pink">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudentLogbook</title>
     <link rel="stylesheet" href="templates/css/style1.css" />
     <link rel="stylesheet" href="templates/css/logbookstyle.css" />
@@ -34,17 +36,6 @@ if (isset($_GET['logout'])) {
     ?>
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
-        <?php if (isset($_SESSION['user'])) : ?>
-            <strong><?php echo $_SESSION['user']['student_id']; ?></strong>
-
-            <small>
-                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['fullname']); ?>)</i>
-                <br>
-                <a href="home.php?logout='1'" style="color: red;">logout</a>
-                &nbsp; <a href="create_user.php"> + add user</a>
-            </small>
-
-        <?php endif ?>
         <?php if (isset($_SESSION['user'])) : ?>
             <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
                 </span><span style="font-family:serif"><?php echo $_SESSION['user']['fullname']; ?></span></div>
@@ -70,7 +61,7 @@ if (isset($_GET['logout'])) {
     <div class="main">
         <form method="post" action="logbook.php">
             <div class="nav" style="width: 90%;">
-                <div class="form-group">
+                <div class="inputgroup">
                     <label for="weeks">WEEKS</label>
                     <select class="form-control" name="week_id" id="weeks">
                         <option value="">--- Choose Week ---</option>
@@ -79,7 +70,7 @@ if (isset($_GET['logout'])) {
                         <?php endforeach; ?>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="inputgroup">
                     <input type="button" value="MONDAY" name="mon_days" onclick="myFunction()" class="btn">
                     <input type="button" value="TUESDAY" name="tue_days" onclick="myFunction1()" class="btn">
                     <input type="button" value="WEDNESDAY" name="wed_days" onclick="myFunction2()" class="btn">
@@ -97,19 +88,19 @@ if (isset($_GET['logout'])) {
                     <hr>
                     <label for="inputEmail4" style="color:black;">TODAY NOTES</label>
                     <input type="text" id="mon" name="mon_day" class="mon" value="MONDAY" placeholder="MONDAY" readonly />
-                    <textarea type="text" id="bld" name="mon_notes" class="form-control bld" placeholder="MONDAY NOTES"></textarea>
+                    <textarea type="text" id="bld" name="mon_notes" class="bld" placeholder="MONDAY NOTES"></textarea>
                     <input type="text" id="tue" name="tue_day" class="tue" value="TUESDAY" placeholder="TUESDAY" readonly />
-                    <textarea type="text" id="cole" name="tue_notes" class="form-control cole" placeholder="TUESDAY NOTES"></textarea>
+                    <textarea type="text" id="cole" name="tue_notes" class="cole" placeholder="TUESDAY NOTES"></textarea>
                     <input type="text" id="wed" name="wed_day" class="tue" value="WEDNESDAY" placeholder="WEDNESDAY" readonly />
-                    <textarea type="text" id="hrt" name="wed_notes" class="form-control hrt" placeholder="WEDNESDAY NOTES"></textarea>
+                    <textarea type="text" id="hrt" name="wed_notes" class="hrt" placeholder="WEDNESDAY NOTES"></textarea>
                     <input type="text" id="thur" name="thur_day" class="thur" value="THURSDAY" placeholder="THURSDAY" readonly />
-                    <textarea type="text" id="thal" name="thur_notes" class="form-control thal" placeholder="THURSDAY NOTES"></textarea>
+                    <textarea type="text" id="thal" name="thur_notes" class="thal" placeholder="THURSDAY NOTES"></textarea>
                     <input type="text" id="fri" name="fri_day" class="fri" value="FRIDAY" placeholder="FRIDAY" readonly />
-                    <textarea type="text" id="wt" name="fri_notes" class="form-control wt" placeholder="FRIDAY NOTES"></textarea>
+                    <textarea type="text" id="wt" name="fri_notes" class="wt" placeholder="FRIDAY NOTES"></textarea>
                     <input type="text" id="sat" name="sat_day" class="sat" value="SATURDAY" placeholder="SATURDAY" readonly />
-                    <textarea type="text" id="ht" name="sat_notes" class="form-control ht" placeholder="SATURDAY NOTES"></textarea>
+                    <textarea type="text" id="ht" name="sat_notes" class="ht" placeholder="SATURDAY NOTES"></textarea>
                     <input type="text" id="remark" name="remark" class="remark" value="REMARK" placeholder="REMARK" readonly />
-                    <textarea type="text" id="rmk" name="remarks_notes" class="form-control rmk" placeholder="WEEKLY REMARK"></textarea>
+                    <textarea type="text" id="rmk" name="remarks_notes" class="rmk" placeholder="WEEKLY REMARK"></textarea>
                     <!-- buttons -->
                     <input type="submit" name="create_post" id="btn_save1" value="MONDAY SUBMIT" class="btn sv2">
                     <input name="create_post1" type="submit" id="btn_save2" value="TUESDAY SUBMIT" class="btn sv3">
@@ -141,11 +132,11 @@ if (isset($_GET['logout'])) {
                     <?php
                     // if (isset($_SESSION['student_id'])) {
                     $student_id = $_SESSION['user']['student_id'];
-                    echo var_dump($student_id);
+                    // echo var_dump($student_id);
                     foreach ($select_all_weeks as $key => $t) {
                         echo "<tr>";
                         echo "<td>" . $t['week_title'] . "</td>";
-                        $conn = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
+                        $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
                         $query12 = "SELECT * FROM logbookdata WHERE week_id='" . $t['week_id'] . "' AND student_id='" . $student_id . "' ";
                         $res = mysqli_query($conn, $query12);
                         $week_days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'REMARK', 'LEC_COMMENT', 'TRAINER_COMMENT');
@@ -169,11 +160,7 @@ if (isset($_GET['logout'])) {
             </table>
         </div>
     </div>
-
-    <!-- footer section -->
-
 </body>
-
 </html>
 <script>
     function myFunction() {

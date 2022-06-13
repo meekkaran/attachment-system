@@ -4,19 +4,23 @@ if (isset($_POST['submit'])) {
     $role_id = $_POST['role_id'];
     $email = $_POST['email'];
     $phonenumber = $_POST['phonenumber'];
-    $password = $_POST['password'];
+    $department = $_POST['department'];
+    $password_1  =  $_POST['password_1'];
+    $password_2  = $_POST['password_2'];
 
-    $sql = "INSERT into `lecturers` (lecname,role_id, email, phonenumber,password, created_at)
-    values('$lecname','$role_id','$email','$phonenumber','$password', now())";
+
+    // register user if there are no errors in the form
+    $password = md5($password_1);
+    $sql = "INSERT into `lecturers` (lecname,role_id, email, phonenumber, department, password, created_at)
+    values('$lecname','$role_id','$email','$phonenumber', '$department','$password', now())";
     $result = mysqli_query($conn, $sql);
     if ($result) {
-        echo "Data inserted carefully";
-        header("Location: ../registeredsupervisors.php");
+        echo "Successfully added a lecturer";
+        // header("Location: ../registeredsupervisors.php");
     } else {
-        echo "Data error";
+        echo "Error,check whether you have entered details correctly";
     }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en" class="bg-pink">
@@ -25,9 +29,8 @@ if (isset($_POST['submit'])) {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CIAMS</title>
+    <title>addLecturer</title>
     <link rel="stylesheet" href="../templates/admin1.css" />
-    <link rel="stylesheet" href="./templates/style1.css" />
     <link rel="stylesheet" type="text/css" href="../templates/style.css">
 </head>
 
@@ -70,33 +73,46 @@ if (isset($_POST['submit'])) {
             </ul>
         </div>
         <div class="main">
-            <h2>Fixed sidebar menu html css</h2>
-            <div class="header">
+            <div class="heading">
                 <h2> Add A Lecturer</h2>
             </div>
 
-            <form method="post" action="">
-                <div class="input-group">
+            <form method="post" action="addlecturer.php">
+                <div class="inputform">
                     <label>Fullname</label>
                     <input type="text" name="lecname" value="">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
                     <label>Role ID</label>
                     <input type="text" name="role_id" value="">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
                     <label>Email</label>
                     <input type="email" name="email">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
                     <label>Phone Number</label>
                     <input type="text" name="phonenumber" value="">
                 </div>
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" name="password">
+                <div class="inputform">
+                    <label for="department">Department:</label>
+                    <select name="department">
+                        <option value="Mathematics and Actuarial Science">Mathematics and Actuarial Science</option>
+                        <option value="Computer and Information Science">Computer and Information Science</option>
+                        <option value="Community Health and Development">Community Health and Development</option>
+                        <option value="Natural Sciences">Natural Sciences</option>
+                        <option value="Nursing">Nursing</option>
+                    </select>
                 </div>
-                <div class="input-group">
+                <div class="inputform">
+                    <label>Password</label>
+                    <input type="password" name="password_1">
+                </div>
+                <div class="inputform">
+                    <label>Confirm password</label>
+                    <input type="password" name="password_2">
+                </div>
+                <div class="inputform">
                     <button type="submit" class="btn" name="submit">Submit</button>
                 </div>
             </form>

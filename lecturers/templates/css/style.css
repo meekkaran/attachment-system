@@ -7,7 +7,7 @@
     background: #F8F8FF;
   }
   
-  .header {
+  .heading {
     width: 30%;
     margin: 50px auto 0px;
     color: white;
@@ -26,15 +26,15 @@
     background: white;
     border-radius: 0px 0px 10px 10px;
   }
-  .input-group {
+  .inputform {
     margin: 10px 0px 10px 0px;
   }
-  .input-group label {
+  .inputform label {
     display: block;
     text-align: left;
     margin: 3px;
   }
-  .input-group input {
+  .inputform input {
     height: 30px;
     width: 93%;
     padding: 5px 10px;

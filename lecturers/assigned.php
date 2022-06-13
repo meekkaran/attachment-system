@@ -1,5 +1,11 @@
 <?php
 session_start();
+//no one can access this page apart from the lecturers /(security)
+if ($_SESSION['utype'] == 'lecturer') {
+} else {
+    echo "<script>alert('You must login first')</script>";
+    echo "<script>location.href'lecturerlogin.php'</script>";
+}
 
 if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -12,13 +18,9 @@ if (isset($_GET['logout'])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en" class="bg-pink">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Lecturer</title>
     <link rel="stylesheet" href="templates/css/style1.css" />
     <link rel="stylesheet" href="templates/css/logbookstyle.css" />
@@ -59,7 +61,7 @@ if (isset($_GET['logout'])) {
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="lecturerlogin.php">
+                <a class="menu_items_link" href="assigned.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -74,7 +76,9 @@ if (isset($_GET['logout'])) {
                     <th><b>Full Name</b></th>
                     <th><b>Admission Number</b></th>
                     <th><b>Phone Number</b></th>
+                    <th><b>Department</b></th>
                     <th><b>Company Name</b></th>
+                    <th><b>Company Contact</b></th>
                     <th><b>Company Address</b></th>
                     <th><b>Action</b></th>
                 </tr>
@@ -86,13 +90,7 @@ if (isset($_GET['logout'])) {
                         $lecturer = $_SESSION['user']['lecturer_id'];
                     }
                     echo var_dump($lecturer);
-                    // $lecturer = "SELECT * FROM lecturers WHERE role_id = $lecturer";
-                    // $lecturer_query = mysqli_query($db, $lecturer);
-                    // while ($lecturer_id = mysqli_fetch_assoc($lecturer_query)) {
 
-                    //     $lec = $lecturer_id['lecturer_id'];
-                    //     // $lec = $lecturer_id['lecturer_id'];
-                    // }
 
                     $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
                     $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student WHERE lecturer={$lecturer}";
@@ -102,13 +100,17 @@ if (isset($_GET['logout'])) {
                         $fullname = $row['fullname'];
                         $admissionnumber = $row['admission_number'];
                         $phonenumber = $row['phone_number'];
+                        $department = $row['department'];
                         $companyname = $row['company_name'];
+                        $companycontact = $row['company_contact'];
                         $companyaddress = $row['company_address'];
                         echo "<tr>";
                         echo "<td>{$fullname}</td>";
                         echo "<td>{$admissionnumber}</td>";
                         echo "<td>{$phonenumber}</td>";
+                        echo "<td>{$department}</td>";
                         echo "<td>{$companyname}</td>";
+                        echo "<td>{$companycontact}</td>";
                         echo "<td>{$companyaddress}</td>";
                         // echo "<td><a href='categories.php?delete={$student_id}'>Delete</a></td>";
                         echo "<td><a href='lecstudentlogbook.php?edit={$student_id}'>Logbook</a></td>";

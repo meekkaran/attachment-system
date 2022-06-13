@@ -4,16 +4,33 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $mobile = $_POST['mobile'];
     $title = $_POST['title'];
-    $password = $_POST['password'];
+    $password_1  = $_POST['password_1'];
+    $password_2  = $_POST['password_2'];
 
-    $sql = "INSERT into `trainers` (trainername,email,mobile,title,password, created_at)
+    if (count($errors) == 0) {
+        $password = md5($password_1);
+        $sql = "INSERT into `trainers` (trainername,email,mobile,title,password, created_at)
     values('$trainername','$email','$mobile','$title','$password', now())";
-    $result = mysqli_query($conn, $sql);
-    if ($result) {
-        echo "Data inserted carefully";
-        header("Location:../registeredtrainers.php");
-    } else {
-        echo "Data error";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            echo "Successfully added a new trainer";
+            // header("Location:../registeredtrainers.php");
+        } else {
+            echo "Error,check whether you have entered details correctly";
+        }
+    }
+}
+
+function display_error()
+{
+    global $errors;
+
+    if (count($errors) > 0) {
+        echo '<div class="error">';
+        foreach ($errors as $error) {
+            echo $error . '<br>';
+        }
+        echo '</div>';
     }
 }
 
@@ -27,7 +44,6 @@ if (isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CIAMS</title>
     <link rel="stylesheet" href="../templates/admin1.css" />
-    <link rel="stylesheet" href="./templates/style1.css" />
     <link rel="stylesheet" type="text/css" href="../templates/style.css">
 </head>
 
@@ -70,33 +86,37 @@ if (isset($_POST['submit'])) {
             </ul>
         </div>
         <div class="main">
-            <h2>Fixed sidebar menu html css</h2>
             <div class="header">
                 <h2> Add A trainer</h2>
             </div>
 
             <form method="post" action="">
-                <div class="input-group">
+                <?php include('../includes/errors.php'); ?>
+                <div class="inputform">
                     <label>Trainer Full Name</label>
                     <input type="text" name="trainername" value="">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
                     <label>Email</label>
                     <input type="email" name="email" value="">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
                     <label>Mobile</label>
                     <input type="text" name="mobile" value="">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
                     <label>Title</label>
                     <input type="text" name="title" value="">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
                     <label>Password</label>
-                    <input type="password" name="password">
+                    <input type="password" name="password_1">
                 </div>
-                <div class="input-group">
+                <div class="inputform">
+                    <label>Confirm password</label>
+                    <input type="password" name="password_2">
+                </div>
+                <div class="inputform">
                     <button type="submit" class="btn" name="submit">Submit</button>
                 </div>
             </form>

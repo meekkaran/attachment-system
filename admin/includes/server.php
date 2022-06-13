@@ -86,3 +86,6 @@ if (isset($_POST['login_user'])) {
     }
   }
 }
+
+
+//if a user wants to reset the password

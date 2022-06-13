@@ -1,5 +1,3 @@
-<?php include('includes/server.php') ?>
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,21 +6,22 @@
 </head>
 
 <body>
-    <div class="header">
+    <div class="heading">
         <h2>Trainer Login</h2>
     </div>
 
-    <form method="post" action="trainerlogin.php">
-        <?php include('includes/errors.php'); ?>
-        <div class="input-group">
+    <form method="post" id="trainlogin" action="login.php" onSubmit="return validateForm()">
+
+        <div class="inputform">
             <label>Email</label>
-            <input type="text" name="email">
+            <input type="text" name="email" id="email">
         </div>
-        <div class="input-group">
+        <div class="inputform">
             <label>Password</label>
-            <input type="password" name="password">
+            <input type="password" name="password" id="password">
         </div>
-        <div class="input-group">
+        <div class="errorform" id="errors"></div>
+        <div class="inputform">
             <button type="submit" class="btn" name="login_btn">Login</button>
         </div>
         <hr>
@@ -32,6 +31,24 @@
             <!-- Go to home page <a href="/index.php">Sign up</a> -->
         </p>
     </form>
+    <script>
+        function validateForm() {
+            //validate email
+            email = document.getElementById("email").value;
+            if (email.length == 0 || email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+                alert("You must enter a valid email");
+                document.getElementById("email").focus();
+                return false;
+            }
+            //validating password
+            password = document.getElementById("password").value;
+            if (password == "" || password.length < 8) {
+                alert("Password should not be empty and it should have more than 8 characters");
+                document.getElementById("password").focus();
+                return false;
+            }
+        }
+    </script>
 </body>
 
 </html>

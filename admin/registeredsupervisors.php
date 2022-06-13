@@ -1,11 +1,8 @@
 <?php include "./includes/db.php"; ?>
 <!DOCTYPE html>
-<html lang="en" class="bg-pink">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>CIAMS</title>
     <link rel="stylesheet" href="./templates/admin1.css" />
 </head>
@@ -19,6 +16,9 @@
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
+            <a class="menu_items_link" href="dashboard.php">
+                    <li class="menu_items_list">Dashboard</li>
+                </a>
                 <a class="menu_items_link" href="registeredstudents.php">
                     <li class="menu_items_list">Registered Students</li>
                 </a>
@@ -49,7 +49,7 @@
             </ul>
         </div>
         <div class="main">
-            <h2>Fixed sidebar menu html css</h2>
+        <h2>Registered Lecturers</h2>
             <!-- fetching reports  -->
             <div class="reports">
                 <form action="#" method="post">
@@ -81,6 +81,14 @@
                             }
                             ?>
                         </select>
+                        <select name="department" id="department">
+                            <option select="department">Department</option>
+                            <option value="Mathematics and Actuarial Science">Mathematics and Actuarial Science</option>
+                            <option value="Computer and Information Science">Computer and Information Science</option>
+                            <option value="Community Health and Development">Community Health and Development</option>
+                            <option value="Natural Sciences">Natural Sciences</option>
+                            <option value="Nursing">Nursing</option>
+                        </select>
                         <select name="Allocated" id="Allocated">
                             <option select="selected">Allocated</option>
                             <option value="yes">YES</option>
@@ -104,6 +112,7 @@
                         <th>Roll ID</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>Department</th>
                         <th>CreatedAt</th>
                         <th>Allocated</th>
                         <th>Update</th>
@@ -117,9 +126,10 @@
                 } elseif (isset($_POST['choice'])) {
                     $month = $_POST['filterChoice'];
                     $year = $_POST['year'];
+                    $department = $_POST['department'];
                     $Allocated = $_POST['Allocated'];
 
-                    $sql = "SELECT * FROM lecturers WHERE YEAR(created_at)='$year' AND MONTH(created_at)='$month' AND Allocated='$Allocated'";
+                    $sql = "SELECT * FROM lecturers WHERE YEAR(created_at)='$year' AND MONTH(created_at)='$month' AND department='$department' AND Allocated='$Allocated'";
                     getData($sql);
                 } elseif (isset($_POST['reset'])) {
                     $query = "SELECT * FROM lecturers";
@@ -128,13 +138,22 @@
                     // <tr><td>No data found!</td></tr>
 
                 }
+
+                //function to delete a lecturer 
+                if (isset($_GET['delete'])) {
+                    $lecturer_id = $_GET['delete'];
+                    $sql = "DELETE from `lecturers` where lecturer_id = {$lecturer_id}";
+                    $result = mysqli_query($conn, $sql);
+                    header('location:registeredsupervisors.php');
+                }
                 ?>
+
 
                 <tbody>
                     <?php
                     function getData($sql)
                     {
-                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
                         $data = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($data) > 0) {
                             while ($row = mysqli_fetch_array($data)) {
@@ -143,6 +162,7 @@
                                 $role_id = $row['role_id'];
                                 $email = $row['email'];
                                 $phonenumber = $row['phonenumber'];
+                                $department = $row['department'];
                                 $created_at = $row['created_at'];
                                 $Allocated = $row['Allocated'];
 
@@ -152,6 +172,7 @@
                                 echo "<td>{$role_id}</td>";
                                 echo "<td>{$email}</td>";
                                 echo "<td>{$phonenumber}</td>";
+                                echo "<td>{$department}</td>";
                                 echo "<td>{$created_at}</td>";
                                 echo "<td>{$Allocated}</td>";
 
@@ -170,13 +191,6 @@
                     ?>
 
                     <!-- deleting records from the db -->
-                    <?php
-                    if (isset($_GET['delete'])) {
-                        $lecturer_id = $_GET['delete'];
-                        $sql = "DELETE from `lecturers` where lecturer_id = $lecturer_id";
-                        $result = mysqli_query($conn, $sql);
-                    }
-                    ?>
 
                 </tbody>
             </table>

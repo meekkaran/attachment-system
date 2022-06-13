@@ -1,6 +1,11 @@
 <?php
 session_start();
-
+//no one can access this page apart from the lecturers /(security)
+if ($_SESSION['utype'] == 'lecturer') {
+} else {
+    echo "<script>alert('You must login first')</script>";
+    echo "<script>location.href'lecturerlogin.php'</script>";
+}
 if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: lecturerlogin.php');
@@ -12,13 +17,11 @@ if (isset($_GET['logout'])) {
 }
 include "lec_student_logbook_function.php";
 ?>
-<!DOCTYPE html>
-<html lang="en" class="bg-pink">
+
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>StudentLogbook</title>
     <link rel="stylesheet" href="templates/css/style1.css" />
     <link rel="stylesheet" href="templates/css/logbookstyle.css" />

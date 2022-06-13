@@ -14,21 +14,21 @@
 		<div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp; </span><span style="font-family:serif"><?php echo "Admin" ?></span></div>
 	</div>
 	<div class="loginform">
-		<div class="header">
+		<div class="heading">
 			<h2>Login</h2>
 		</div>
 
 		<form method="post" action="login.php">
 			<?php include('includes/errors.php'); ?>
-			<div class="input-group">
+			<div class="inputform">
 				<label>Username</label>
 				<input type="text" name="username">
 			</div>
-			<div class="input-group">
+			<div class="inputform">
 				<label>Password</label>
 				<input type="password" name="password">
 			</div>
-			<div class="input-group">
+			<div class="inputform">
 				<button type="submit" class="btn" name="login_user">Login</button>
 			</div>
 			<p>
