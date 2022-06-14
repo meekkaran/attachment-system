@@ -137,8 +137,7 @@
                             echo "<td>{$id}</td>";
                             echo "<td>{$student}</td>";
                             echo "<td>{$lecturer}</td>";
-                            echo "<td><a href='assignedlecturers.php?delete={$lecturer_id}'class='adminbtn'>Delete</a></td>";
-
+                            echo "<td><a href='delete.php?delete={$id}'class='adminbtn'>Delete</a></td>";
                             echo "</tr>";
                         };
                         ?>

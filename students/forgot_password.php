@@ -1,37 +1,27 @@
 <?php include "./includes/db.php";
 session_start();
 //user can change password
-if (isset($_POST['change-password'])) {
 
-    $admissionnumber = trim($_POST['admissionnumber']);/* removing whitespaces  */
-    $admissionnumber = mysqli_real_escape_string($conn, $admissionnumber);/* escaping special chars from sql injection */
+if (isset($_POST['re_password'])) {
+    $admissionnumber = $_POST['admissionnumber'];
+    $old_pass = $_POST['old_pass'];
+    $password = $_POST['password'];
+    $re_pass = $_POST['re_pass'];
 
-    $password = $_POST['password'];/* new password */
-    $repassword = $_POST['repassword'];/* repeat password */
-    $cpassword = $_POST['cpassword'];
-
-    $password = md5($password);
-    $cpassword = $_POST['cpassword'];
-    $cpassword = md5($cpassword);
-
-    $stmt = "SELECT * FROM students WHERE admissionnumber='$admissionnumber' and password='$password' "; #check for a user with the same username and password 
-    $result = mysqli_query($conn, $stmt);/* execute the query */
-    $rows = mysqli_num_rows($result);/* count the number of arrays returened by the query */
-    if ($rows != 1) #if current credentials are wrong 
-    {
-        echo "<script>alert('Invalid Admission Number or password')</script>";/* inform user to  change their credentials */
-        header('location: studentlogin.php');/* redirect back to the login */
-        die;/* stop executing the script */
-    } else if ($password == $repassword) {/* if the password and the repeat password are the same */
-        #$sql = "UPDATE  students  SET password='$password' WHERE admissionnumber='$admissionnumber' ";/* update the password */
-        $sql = "UPDATE  students  SET password='$password' WHERE admissionnumber='$admissionnumber' ";
-        $query = mysqli_query($conn, $sql);
-        echo "<script>alert('Successfully updated password please login.')</script>";
-        header('location: studentlogin.php');
+    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    $password_query = mysqli_query($conn, "SELECT * from students where admissionnumber= '$admissionnumber'");
+    $password_row = mysqli_fetch_array($password_query);
+    $database_password = $password_row['password'];
+    if ($database_password == $old_pass) {
+        if ($password == $re_pass) {
+            $update_pwd = mysqli_query($conn, "UPDATE students set password='$password' where admissionnumber= '$admissionnumber'");
+            echo "<script>alert('Update Sucessfully'); window.location='studentlogin'</script>";
+        } else {
+            echo "<script>alert('Your new and Retype Password is not match'); window.location='forgot_password.php'</script>";
+        }
     } else {
-        echo "<script>alert('Password and Repeat Password dont match try again')</script>";
-        header('location: forgot_password.php');
-    } //end of else
+        echo "<script>alert('Your old password is wrong'); window.location='forgot_password.php'</script>";
+    }
 }
 ?>
 
@@ -48,14 +38,14 @@ if (isset($_POST['change-password'])) {
         <h2>Reset Your Password</h2>
     </div>
 
-    <form method="post" action="login.php" onSubmit="return validateForm()">
+    <form method="post" action="" onSubmit="return validateForm()">
         <div class="inputform">
             <label>Admission Number</label>
             <input type="text" id="admissionnumber" name="admissionnumber">
         </div>
         <div class="inputform">
             <label>Old Password</label>
-            <input type="password" id="cpassword" name="cpassword">
+            <input type="password" id="old_pass" name="old_pass">
         </div>
         <div class="inputform">
             <label>New Password</label>
@@ -63,10 +53,10 @@ if (isset($_POST['change-password'])) {
         </div>
         <div class="inputform">
             <label>Repeat New password</label>
-            <input type="password" id="repassword" name="repassword">
+            <input type="password" id="re_pass" name="re_pass">
         </div>
         <div class="inputform">
-            <button type="submit" class="btn" name="change-password">Reset Your Password</button>
+            <button type="submit" class="btn" name="re_password">Reset Your Password</button>
         </div>
     </form>
 </body>

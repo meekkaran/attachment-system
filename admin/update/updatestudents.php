@@ -42,118 +42,77 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
-
-<!DOCTYPE html>
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>CIAMS</title>
     <link rel="stylesheet" href="../templates/admin1.css" />
     <link rel="stylesheet" type="text/css" href="../templates/style.css">
 </head>
 
 <body>
-    <div id="top-navigation">
-        <div id="logo"> CIAMS</div>
-        <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp; </span><span style="font-family:serif"><?php echo "Admin" ?></span></div>
-    </div>
-    <div class="admincontent">
-        <div class="sidebar">
-            <ul id="menu_list">
-                <a class="menu_items_link" href="../registeredstudents.php">
-                    <li class="menu_items_list">Registered Students</li>
-                </a>
-                <a class="menu_items_link" href="../submitreports.php">
-                    <li class="menu_items_list">Student Reports</li>
-                </a>
-                <a class="menu_items_link" href="../attachmentlogbooks.php">
-                    <li class="menu_items_list">Attachment Logbooks</li>
-                </a>
-                <a class="menu_items_link" href="../registeredsupervisors.php">
-                    <li class="menu_items_list">Registered Supervisors</li>
-                </a>
-                <a class="menu_items_link" href="../assignedlecturers.php">
-                    <li class="menu_items_list">Assign Supervisors</li>
-                </a>
-                <a class="menu_items_link" href="../registeredtrainers.php">
-                    <li class="menu_items_list">Registered Trainers</li>
-                </a>
-                <a class="menu_items_link" href="../studentstrainers.php">
-                    <li class="menu_items_list">Students' Trainers</li>
-                </a>
-                <a class="menu_items_link" href="changepassword.php">
-                    <li class="menu_items_list">Change Password</li>
-                </a>
-                <a class="menu_items_link" href="../../index.php">
-                    <li class="menu_items_list">Logout</li>
-                </a>
-            </ul>
-        </div>
-        <div class="main">
-            <div class="heading">
-                <h2> Update A Student</h2>
-            </div>
 
-            <form method="post" action="">
-                <div class="inputform">
-                    <label>Fullname</label>
-                    <input type="text" name="fullname" value="<?php echo $fullname ?>">
-                </div>
-                <div class="inputform">
-                    <label>Admission Number</label>
-                    <input type="text" name="admission_number" value="<?php echo $admissionnumber ?>">
-                </div>
-                <div class="inputform">
-                    <label>Email</label>
-                    <input type="email" name="email" value="<?php echo $email ?>">
-                </div>
-                <div class="inputform">
-                    <label>Phone Number</label>
-                    <input type="text" name="phone_number" value="<?php echo $phonenumber ?>">
-                </div>
-                <div class="inputform">
-                    <label for="department">Department:</label>
-                    <select name="department" value="<?php echo $department ?>">
-                        <option value="Mathematics and Actuarial Science">Mathematics and Actuarial Science</option>
-                        <option value="Computer and Information Science">Computer and Information Science</option>
-                        <option value="Community Health and Development">Community Health and Development</option>
-                        <option value="Natural Sciences">Natural Sciences</option>
-                        <option value="Nursing">Nursing</option>
-                    </select>
-                </div>
-                <div class="inputform">
-                    <label>Company Name</label>
-                    <input type="text" name="company_name" value="<?php echo $companyname ?>">
-                </div>
-                <div class="inputform">
-                    <label>Company Contact</label>
-                    <input type="text" name="company_contact" value="<?php echo $companycontact ?>">
-                </div>
-                <div class="inputform">
-                    <label>Company Address</label>
-                    <input type="text" name="company_address" value="<?php echo $companyaddress ?>">
-                </div>
-                <div class="inputform">
-                    <label>Company Email</label>
-                    <input type="text" name="company_email" value="<?php echo $companyemail ?>">
-                </div>
-                <div class="inputform">
-                    <label>Starting Date</label>
-                    <input type="date" name="startingdate" value="<?php echo $startingdate ?>">
-                </div>
-                <div class="inputform">
-                    <label>Password</label>
-                    <input type="password" name="password" value="<?php echo $password ?>">
-                </div>
-                <div class="inputform">
-                    <button type="submit" class="btn" name="submit">Update</button>
-                </div>
-            </form>
-        </div>
+    <div class="heading">
+        <h2> Update A Student</h2>
     </div>
+
+    <form method="post" action="">
+        <div class="inputform">
+            <label>Fullname</label>
+            <input type="text" name="fullname" value="<?php echo $fullname ?>">
+        </div>
+        <div class="inputform">
+            <label>Admission Number</label>
+            <input type="text" name="admission_number" value="<?php echo $admissionnumber ?>">
+        </div>
+        <div class="inputform">
+            <label>Email</label>
+            <input type="email" name="email" value="<?php echo $email ?>">
+        </div>
+        <div class="inputform">
+            <label>Phone Number</label>
+            <input type="text" name="phone_number" value="<?php echo $phonenumber ?>">
+        </div>
+        <div class="inputform">
+            <label for="department">Department:</label>
+            <select name="department" value="<?php echo $department ?>">
+                <option value="Mathematics and Actuarial Science">Mathematics and Actuarial Science</option>
+                <option value="Computer and Information Science">Computer and Information Science</option>
+                <option value="Community Health and Development">Community Health and Development</option>
+                <option value="Natural Sciences">Natural Sciences</option>
+                <option value="Nursing">Nursing</option>
+            </select>
+        </div>
+        <div class="inputform">
+            <label>Company Name</label>
+            <input type="text" name="company_name" value="<?php echo $companyname ?>">
+        </div>
+        <div class="inputform">
+            <label>Company Contact</label>
+            <input type="text" name="company_contact" value="<?php echo $companycontact ?>">
+        </div>
+        <div class="inputform">
+            <label>Company Address</label>
+            <input type="text" name="company_address" value="<?php echo $companyaddress ?>">
+        </div>
+        <div class="inputform">
+            <label>Company Email</label>
+            <input type="text" name="company_email" value="<?php echo $companyemail ?>">
+        </div>
+        <div class="inputform">
+            <label>Starting Date</label>
+            <input type="date" name="startingdate" value="<?php echo $startingdate ?>">
+        </div>
+        <div class="inputform">
+            <label>Password</label>
+            <input type="password" name="password" value="<?php echo $password ?>">
+        </div>
+        <div class="inputform">
+            <button type="submit" class="btn" name="submit">Update</button>
+            <button type="submit" class="btn" name="submit"><a href="../registeredstudents.php">BACK</a></button>
+        </div>
+    </form>
 </body>
 
 </html>

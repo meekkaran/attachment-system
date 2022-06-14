@@ -39,6 +39,9 @@ if (isset($_GET['logout'])) {
                 <a class="menu_items_link" href="submitreports.php">
                     <li class="menu_items_list" style="background-color:orange;padding-left:16px">Submit Reports</li>
                 </a>
+                <a class="menu_items_link" href="changepassword.php">
+                    <li class="menu_items_list">Change Password</li>
+                </a>
                 <a class="menu_items_link" href="submitreports.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>

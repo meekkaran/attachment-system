@@ -46,7 +46,7 @@
             </ul>
         </div>
         <div class="main">
-
+            <h2>List of students with their trainers</h2>
             <table border="1" cellpadding="0">
                 <thead>
                     <tr>

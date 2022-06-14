@@ -17,7 +17,7 @@
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-            <a class="menu_items_link" href="dashboard.php">
+                <a class="menu_items_link" href="dashboard.php">
                     <li class="menu_items_list">Dashboard</li>
                 </a>
                 <a class="menu_items_link" href="registeredstudents.php">
@@ -180,7 +180,7 @@
                                 echo "<td>{$startingdate}</td>";
                                 echo "<td>{$Allocated}</td>";
                                 echo "<td><a href='update/updatestudents.php?update={$student_id}' class='adminbtn1'>Update</a></td>";
-                                echo "<td><a href='delete/deletestudent.php?delete={$student_id}' onclick='return checkdelete()' class='adminbtn'>Delete</a></td>";
+                                echo "<td><a href='delete.php?delete={$student_id}' class='adminbtn'>Delete</a></td>";
                                 echo "</tr>";
                             }
                         } else { ?>
@@ -194,26 +194,10 @@
 
                     ?>
 
-
-
-                    <!-- deleting records from the db -->
-                    <?php
-
-                    ?>
-
                 </tbody>
             </table>
         </div>
-
-
     </div>
-
-
 </body>
-<script>
-    function checkdelete() {
-        return confirm('Are you sure you want to delelte this record?');
-    }
-</script>
 
 </html>

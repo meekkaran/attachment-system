@@ -51,6 +51,9 @@ if (isset($_GET['logout'])) {
                 <a class="menu_items_link" href="submitreports.php">
                     <li class="menu_items_list">Student Reports</li>
                 </a>
+                <a class="menu_items_link" href="changepassword.php">
+                    <li class="menu_items_list">Change Password</li>
+                </a>
                 <a class="menu_items_link" href="logbook.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
@@ -133,6 +136,7 @@ if (isset($_GET['logout'])) {
                     // if (isset($_SESSION['student_id'])) {
                     $student_id = $_SESSION['user']['student_id'];
                     // echo var_dump($student_id);
+                      // create variables from the associative array
                     foreach ($select_all_weeks as $key => $t) {
                         echo "<tr>";
                         echo "<td>" . $t['week_title'] . "</td>";

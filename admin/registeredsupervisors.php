@@ -16,7 +16,7 @@
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-            <a class="menu_items_link" href="dashboard.php">
+                <a class="menu_items_link" href="dashboard.php">
                     <li class="menu_items_list">Dashboard</li>
                 </a>
                 <a class="menu_items_link" href="registeredstudents.php">
@@ -49,7 +49,7 @@
             </ul>
         </div>
         <div class="main">
-        <h2>Registered Lecturers</h2>
+            <h2>Registered Lecturers</h2>
             <!-- fetching reports  -->
             <div class="reports">
                 <form action="#" method="post">
@@ -177,7 +177,7 @@
                                 echo "<td>{$Allocated}</td>";
 
                                 echo "<td><a href='update/updatelecturers.php?update={$lecturer_id}'class='adminbtn1'>Update</a></td>";
-                                echo "<td><a href='registeredsupervisors.php?delete={$lecturer_id}'class='adminbtn'>Delete</a></td>";
+                                echo "<td><a href='delete.php?delete={$lecturer_id}' class='adminbtn'>Delete</a></td>";
                                 echo "</tr>";
                             }
                         } else { ?>
@@ -189,9 +189,6 @@
                         }
                     }
                     ?>
-
-                    <!-- deleting records from the db -->
-
                 </tbody>
             </table>
         </div>

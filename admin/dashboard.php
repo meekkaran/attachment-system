@@ -48,86 +48,89 @@
             </ul>
         </div>
         <div class="main">
-            <h2>Registered users in the system</h2>
-            <div class="columns">
-                <div class="column">
-                    <h2>Registered Lecturers</h2>
-                    <?php
-                    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
-                    $query = "SELECT * FROM lecturers ORDER BY lecturer_id";
-                    $query_run = mysqli_query($conn, $query);
-                    $row = mysqli_num_rows($query_run);
-                    echo '<h1> ' . $row . '</h1>';
-                    ?>
+            <div class="main2">
+                <h2>Registered users in the system</h2>
+                <div class="columns">
+                    <div class="column">
+                        <h4>REGISTERED LECTURERS</h4>
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $query = "SELECT * FROM lecturers ORDER BY lecturer_id";
+                        $query_run = mysqli_query($conn, $query);
+                        $row = mysqli_num_rows($query_run);
+                        echo '<h1> ' . $row . '</h1>';
+                        ?>
+                    </div>
+                    <div class="column">
+                        <h4>REGISTERED STUDENTS</h4>
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $query = "SELECT * FROM students ORDER BY student_id";
+                        $query_run = mysqli_query($conn, $query);
+                        $row = mysqli_num_rows($query_run);
+                        echo '<h1> ' . $row . '</h1>';
+                        ?>
+                    </div>
+                    <div class="column">
+                        <h4>REGISTERED TRAINERS</h4>
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $query = "SELECT * FROM trainers ORDER BY trainer_id";
+                        $query_run = mysqli_query($conn, $query);
+                        $row = mysqli_num_rows($query_run);
+                        echo '<h1> ' . $row . '</h1>';
+                        ?>
+                    </div>
                 </div>
-                <div class="column">
-                    <h2>Registered Students</h2>
-                    <?php
-                    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
-                    $query = "SELECT * FROM students ORDER BY student_id";
-                    $query_run = mysqli_query($conn, $query);
-                    $row = mysqli_num_rows($query_run);
-                    echo '<h1> ' . $row . '</h1>';
-                    ?>
+                <h2>List of both students and lecturers who have been assigned </h2>
+                <div class="columns">
+                    <div class="column">
+                        <h4>ALLOCATED LECTURERS</h4>
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $query = "SELECT * FROM lecturers WHERE Allocated = 'YES'";
+                        $query_run = mysqli_query($conn, $query);
+                        $row = mysqli_num_rows($query_run);
+                        echo '<h1> ' . $row . '</h1>';
+                        ?>
+                    </div>
+                    <div class="column">
+                        <h4>ALLOCATED STUDENTS</h4>
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $query = "SELECT * FROM students WHERE Allocated = 'YES'";
+                        $query_run = mysqli_query($conn, $query);
+                        $row = mysqli_num_rows($query_run);
+                        echo '<h1> ' . $row . '</h1>';
+                        ?>
+                    </div>
                 </div>
-                <div class="column">
-                    <h2>Registered Trainers</h2>
-                    <?php
-                    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
-                    $query = "SELECT * FROM trainers ORDER BY trainer_id";
-                    $query_run = mysqli_query($conn, $query);
-                    $row = mysqli_num_rows($query_run);
-                    echo '<h1> ' . $row . '</h1>';
-                    ?>
+                <h2>List of both students and lecturers who have not been assigned </h2>
+                <div class="columns">
+                    <div class="column">
+                        <h4>UNALLOCATED LECTURERS</h4>
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $query = "SELECT * FROM lecturers WHERE Allocated = 'NO'";
+                        $query_run = mysqli_query($conn, $query);
+                        $row = mysqli_num_rows($query_run);
+                        echo '<h1> ' . $row . '</h1>';
+                        ?>
+                    </div>
+                    <div class="column">
+                        <h4>UNALLOCATED STUDENTS</h4>
+                        <?php
+                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $query = "SELECT * FROM students WHERE Allocated = 'NO'";
+                        $query_run = mysqli_query($conn, $query);
+                        $row = mysqli_num_rows($query_run);
+                        echo '<h1> ' . $row . '</h1>';
+                        ?>
+                    </div>
                 </div>
             </div>
-            <h2>Allocated Users</h2>
-            <div class="columns">
-                <div class="column">
-                    <h2>Allocated Lecturers</h2>
-                    <?php
-                    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
-                    $query = "SELECT * FROM lecturers WHERE Allocated = 'YES'";
-                    $query_run = mysqli_query($conn, $query);
-                    $row = mysqli_num_rows($query_run);
-                    echo '<h1> ' . $row . '</h1>';
-                    ?>
-                </div>
-                <div class="column">
-                    <h2>Allocated Students</h2>
-                    <?php
-                    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
-                    $query = "SELECT * FROM students WHERE Allocated = 'YES'";
-                    $query_run = mysqli_query($conn, $query);
-                    $row = mysqli_num_rows($query_run);
-                    echo '<h1> ' . $row . '</h1>';
-                    ?>
-                </div>
-                <div class="column">
-                    <h2>Unallocated Lecturers</h2>
-                    <?php
-                    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
-                    $query = "SELECT * FROM lecturers WHERE Allocated = 'NO'";
-                    $query_run = mysqli_query($conn, $query);
-                    $row = mysqli_num_rows($query_run);
-                    echo '<h1> ' . $row . '</h1>';
-                    ?>
-                </div>
-                <div class="column">
-                    <h2>Unallocated Students</h2>
-                    <?php
-                    $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
-                    $query = "SELECT * FROM students WHERE Allocated = 'NO'";
-                    $query_run = mysqli_query($conn, $query);
-                    $row = mysqli_num_rows($query_run);
-                    echo '<h1> ' . $row . '</h1>';
-                    ?>
-                </div>
-            </div>
+
         </div>
-
-
-    </div>
 
 
 </body>

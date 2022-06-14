@@ -144,7 +144,9 @@ select{
 /* //styling the collumns for displaying number of users */
 .main .column {
     float: left;
-    width: 33.33%;
+    width: 20%;
+    margin: 20px;;
+    
   }
   
   /* Stops the float property from affecting content after the columns */
@@ -153,3 +155,23 @@ select{
     display: table;
     clear: both;
   }
+.main .columns .column{
+    border:1px solid #800000;
+    border-radius: 10px;
+    padding:20px;
+    background-color: #800000;
+}
+.main .columns .column:hover{
+    background-color: orange;
+}
+.main .columns .column h4{
+    text-align: center;
+    color:#fff;
+}
+.main .columns .column h1{
+    text-align: center;
+    color:#fff;
+}
+.main2{
+    padding-left: 10%;
+}

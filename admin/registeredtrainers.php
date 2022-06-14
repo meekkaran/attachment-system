@@ -85,19 +85,10 @@
                         echo "<td>{$title}</td>";
                         echo "<td>{$created_at}</td>";
                         echo "<td><a href='update/updatetrainers.php?update={$trainer_id}'class='adminbtn1'>Update</a></td>";
-                        echo "<td><a href='registeredtrainers.php?delete={$trainer_id}'class='adminbtn'>Delete</a></td>";
+                        echo "<td><a href='delete.php?delete={$trainer_id}'class='adminbtn'>Delete</a></td>";
                         echo "</tr>";
                     }
                     ?>
-                    <!-- deleting records from the db -->
-                    <?php
-                    if (isset($_GET['delete'])) {
-                        $trainer_id = $_GET['delete'];
-                        $sql = "DELETE from `trainers` where trainer_id = '$trainer_id'";
-                        $result = mysqli_query($conn, $sql);
-                    }
-                    ?>
-
                 </tbody>
             </table>
         </div>

@@ -45,19 +45,28 @@ function register()
     // register user if there are no errors in the form
     // if (count($errors) == 0) {
     $password = md5($password_1); //encrypt the password before saving in the database
-    $query = "INSERT INTO students (fullname,admission_number, email, phone_number, department, company_name, company_Contact,
-         company_address,company_email, startingdate, password,created_at) 
-  			  VALUES('$fullname','$admissionnumber', '$email','$phonenumber', '$department', '$companyname','$companycontact',
-                '$companyaddress','$companyemail', '$startingdate', '$password',now())";
+    $sql = "SELECT * FROM students WHERE admissionnumber = '$admissionnumber'";
+    $result = mysqli_query($db, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        echo "<script>alert('Admissionnumber already taken')</script>";
+    } else {
+        $query = "INSERT INTO students (fullname,admission_number, email, phone_number, department, company_name, company_Contact,
+        company_address,company_email, startingdate, password,created_at) 
+               VALUES('$fullname','$admissionnumber', '$email','$phonenumber', '$department', '$companyname','$companycontact',
+               '$companyaddress','$companyemail', '$startingdate', '$password',now())";
+        $result2 = mysqli_query($db, $query);
+    }
+
+
     // mysqli_query($db, $query);
-    if (mysqli_query($db, $query)) {
+    if ($result2) {
         echo "<script>alert('sccessfull')</script>";
     } else {
         echo "<script>alert('error')</script>";
     }
 
     // get id of the created user
-    $logged_in_user_id = mysqli_insert_id($db);//returns generated id of most recent query
+    $logged_in_user_id = mysqli_insert_id($db); //returns generated id of most recent query
 
     $_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
     $_SESSION['success']  = "You are now logged in";
@@ -80,42 +89,4 @@ function e($val)
 {
     global $db;
     return mysqli_real_escape_string($db, trim($val));
-}
-
-
-
-//if a student wants to change password
-if (isset($_POST['forgot-password'])) {    /* if user wants to change the password */
-    $admissionnumber    =  e($_POST['admissionnumber']);/* escaping special chars from sql injection */
-    $password_1  =  $_POST['password_1'];
-    $password_2  =  $_POST['password_2'];
-
-    // $password = $_POST['pwd'];/* new password */
-    // $repwd = $_POST['re_pwd'];/* repeat password */
-
-    $password = md5($password_1);
-
-    // $pwd = md5($password);
-    // $c_pwd = $_POST['cpwd'];
-    // $cpwd = md5($c_pwd);
-
-    $conn = "SELECT * FROM students WHERE admissionnumber='$admissionnumber' and password='$password'  "; #check for a user with the same username and password 
-    $result = mysqli_query($db, $conn);/* execute the query */
-    $rows = mysqli_num_rows($result);/* count the number of arrays returened by the query */
-    if ($rows != 1) #if current credentials are wrong 
-    {
-        $_SESSION['message'] = ' ***Invalid admissionnumber or password';/* inform user to  change their credentials */
-        header('location: forgot_password.php');/* redirect back to the login */
-        die;/* stop executing the script */
-    }
-
-    if ($password_1 == $password_2) {/* if the password and the repeat password are the same */
-        #$sql = "UPDATE  users  SET pwd='$pwd' WHERE uname='$username' ";/* update the password */
-        $sql = "UPDATE students  SET password='$password' WHERE admissionnumber='$admissionnumber' ";
-        $query = mysqli_query($db, $sql);
-        if ($query) {
-            echo "password has been changed successfully";
-            header('location:studentlogin.php');
-        }
-    }
 }
