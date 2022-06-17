@@ -16,6 +16,9 @@
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
+            <a class="menu_items_link" href="dashboard.php">
+                    <li class="menu_items_list">Dashboard</li>
+                </a>
                 <a class="menu_items_link" href="registeredstudents.php">
                     <li class="menu_items_list">Registered Students</li>
                 </a>
@@ -37,10 +40,19 @@
                 <a class="menu_items_link" href="studentstrainers.php">
                     <li class="menu_items_list">Students' Trainers</li>
                 </a>
+                <a class="menu_items_link" href="studentslogs.php">
+                    <li class="menu_items_list">Student Logs</li>
+                </a>
+                <a class="menu_items_link" href="lecturerlogs.php">
+                    <li class="menu_items_list">Lecturer logs</li>
+                </a>
+                <a class="menu_items_link" href="trainerlogs.php">
+                    <li class="menu_items_list">Trainer Logs</li>
+                </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="submitreports.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -118,7 +130,7 @@
                     <?php
                     function getData($sql)
                     {
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $data = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($data) > 0) {
                             while ($row = mysqli_fetch_array($data)) {
@@ -132,7 +144,7 @@
                                 echo "<td>{$id}</td>";
                                 echo "<td>{$title}</td>";
                                 echo "<td>{$student_id}</td>";
-                                echo "<td>{$report}</td>";
+                                echo "<td><a href='#' onclick = vrep('$report')>{$report}</a></td>";
                                 echo "<td>{$posted_at}</td>";
                                 echo "</tr>";
                             }
@@ -148,12 +160,22 @@
             </table>
         </div>
 
-
     </div>
 
+    <!-- <script>
+        function vrep(rep) {
+            let urla = ".../students/reports";
+            let url = urla + rep;
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = url.split('/').pop();
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    </script> -->
 
 </body>
-
 
 
 </html>

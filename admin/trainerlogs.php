@@ -3,6 +3,7 @@
 <html>
 
 <head>
+
     <title>CIAMS</title>
     <link rel="stylesheet" href="./templates/admin1.css" />
 </head>
@@ -16,7 +17,7 @@
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-            <a class="menu_items_link" href="dashboard.php">
+                <a class="menu_items_link" href="dashboard.php">
                     <li class="menu_items_list">Dashboard</li>
                 </a>
                 <a class="menu_items_link" href="registeredstudents.php">
@@ -26,7 +27,7 @@
                     <li class="menu_items_list">Student Reports</li>
                 </a>
                 <a class="menu_items_link" href="attachmentlogbooks.php">
-                    <li class="menu_items_list" style="background-color:orange;padding-left:16px">Attachment Logbooks</li>
+                    <li class="menu_items_list">Attachment Logbooks</li>
                 </a>
                 <a class="menu_items_link" href="registeredsupervisors.php">
                     <li class="menu_items_list">Registered Supervisors</li>
@@ -47,24 +48,25 @@
                     <li class="menu_items_list">Lecturer logs</li>
                 </a>
                 <a class="menu_items_link" href="trainerlogs.php">
-                    <li class="menu_items_list">Trainer Logs</li>
+                    <li class="menu_items_list" style="background-color:orange;padding-left:16px">Trainer Logs</li>
                 </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="attachmentlogbooks.php?logout">
+                <a class="menu_items_link" href="registeredstudents.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
         </div>
         <div class="main">
-            <h2>Students' Logbooks</h2>
+            <h2>Students' Logs</h2>
+
             <!-- fetching reports  -->
             <div classs="reports">
                 <form action="" method="GET">
                     <div class="options">
-                        <input type="text" name="student_id" placeholder="Enter StudentID" value="<?php if (isset($_GET['student_id'])) {
-                                                                                                        echo $_GET['student_id'];
+                        <input type="text" name="trainer_id" placeholder="Enter TrainerID" value="<?php if (isset($_GET['trainer_id'])) {
+                                                                                                        echo $_GET['trainer_id'];
                                                                                                     } ?>" />
                         <input type="submit" name="search" value="SEARCH BY ID" class="bton">
                         <input type="submit" value="reset" name="reset" class="bton">
@@ -75,27 +77,26 @@
             <table border="1" cellpadding="0">
                 <thead>
                     <tr>
-                        <th>LogbookID</th>
-                        <th>WeekID</th>
-                        <th>DayTitle</th>
-                        <th>DayNotes</th>
-                        <th>CreatedAt</th>
-                        <th>StudentId</th>
+                        <th>ID</th>
+                        <th>Trainer ID</th>
+                        <th>Action</th>
+                        <th>Time</th>
                     </tr>
                 </thead>
-                <!-- search student ID function -->
+                <!-- reports php function -->
                 <?php
+                // <!-- search lecturer ID function -->
                 $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
 
                 if (!isset($_GET['search'])) {
-                    $query = "SELECT * FROM logbookdata";
+                    $query = "SELECT * FROM trainerlogs";
                     getData($query);
                 } elseif (isset($_GET['search'])) {
-                    $student_id = $_GET['student_id'];
-                    $sql = "SELECT * FROM logbookdata WHERE student_id='$student_id'";
+                    $trainer_id = $_GET['trainer_id'];
+                    $sql = "SELECT * FROM trainerlogs WHERE trainer_id='$trainer_id'";
                     getData($sql);
                 } elseif (isset($_POST['reset'])) {
-                    $query = "SELECT * FROM logbookdata";
+                    $query = "SELECT * FROM trainerlogs";
                     getData($query);
                 } else {
                     // <tr><td>No data found!</td></tr>
@@ -110,23 +111,20 @@
                         $data = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($data) > 0) {
                             while ($row = mysqli_fetch_array($data)) {
-                                $logbk_id = $row['logbk_id'];
-                                $week_id = $row['week_id'];
-                                $day_title = $row['day_title'];
-                                $day_notes = $row['day_notes'];
-                                $created_at = $row['created_at'];
-                                $student_id = $row['student_id'];
+                                $id = $row['id'];
+                                $trainer_id = $row['trainer_id'];
+                                $action = $row['action'];
+                                $time = $row['time'];
 
                                 echo "<tr>";
-                                echo "<td>{$logbk_id}</td>";
-                                echo "<td>{$week_id}</td>";
-                                echo "<td>{$day_title}</td>";
-                                echo "<td>{$day_notes}</td>";
-                                echo "<td>{$created_at}</td>";
-                                echo "<td>{$student_id}</td>";
+                                echo "<td>{$id}</td>";
+                                echo "<td>{$trainer_id}</td>";
+                                echo "<td>{$action}</td>";
+                                echo "<td>{$time}</td>";
                                 echo "</tr>";
                             }
                         } else { ?>
+
                             <tr>
                                 <td>No data found!</td>
                             </tr>
@@ -135,16 +133,11 @@
                     }
 
                     ?>
+
                 </tbody>
             </table>
         </div>
-
-
     </div>
-
-
 </body>
-
-
 
 </html>

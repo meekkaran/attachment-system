@@ -2,7 +2,7 @@
 session_start();
 
 // connect to database
-$db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+$db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
 
 // variable declaration
 $admissionnumber = "";
@@ -17,19 +17,20 @@ function register()
     // call these variables with the global keyword to make them available in function
     global $db, $admissionnumber, $email;
 
-    // receive all input values from the form. Call the e() function
+    // receive all input values from the form. Call the mysqli_real_escape_string() function
     // defined below to escape form values
-    $fullname  =  e($_POST['fullname']);
-    $admissionnumber    =  e($_POST['admissionnumber']);
-    $email       =  e($_POST['email']);
-    $phonenumber    =  e($_POST['phonenumber']);
-    $department = e($_POST['department']);
-    $companyname = e($_POST['companyname']);
-    $companycontact = e($_POST['companycontact']);
-    $companyaddress = e($_POST['companyaddress']);
-    $companyemail = e($_POST['companyemail']);
-    $startingdate = e($_POST['startingdate']);
-    $password_1  =  e($_POST['password_1']);
+    $fullname  =  mysqli_real_escape_string($db, $_POST['fullname']);
+    $admissionnumber    =  mysqli_real_escape_string($db, $_POST['admissionnumber']);
+    $email       =  mysqli_real_escape_string($db, $_POST['email']);
+    $phonenumber    =  mysqli_real_escape_string($db, $_POST['phonenumber']);
+    $department = mysqli_real_escape_string($db, $_POST['department']);
+    $companyname = mysqli_real_escape_string($db, $_POST['companyname']);
+    $companycontact = mysqli_real_escape_string($db, $_POST['companycontact']);
+    $companyaddress = mysqli_real_escape_string($db, $_POST['companyaddress']);
+    $companyemail = mysqli_real_escape_string($db, $_POST['companyemail']);
+    $startingdate = mysqli_real_escape_string($db, $_POST['startingdate']);
+    $password_1  =  mysqli_real_escape_string($db, $_POST['password_1']);
+    $password_2  =  mysqli_real_escape_string($db, $_POST['password_2']);
 
     //prevent cross-site scripting
     $fullname = htmlspecialchars($fullname);
@@ -40,16 +41,21 @@ function register()
     $companyname = htmlspecialchars($companyname);
     $companyaddress = htmlspecialchars($companyaddress);
     $companyemail = htmlspecialchars($companyemail);
+    $password_1 = htmlspecialchars($password_1);
+    $password_2 = htmlspecialchars($password_2);
 
+    //make sure both passwords do match
+    if ($_POST['password_1'] != $_POST['password_2']) {
+        echo ('The two Passwords do not match!');
+    }
 
     // register user if there are no errors in the form
-    // if (count($errors) == 0) {
-    $password = md5($password_1); //encrypt the password before saving in the database
-    $sql = "SELECT * FROM students WHERE admissionnumber = '$admissionnumber'";
+    $sql = "SELECT * FROM students WHERE admission_number = '$admissionnumber'";
     $result = mysqli_query($db, $sql);
     if (mysqli_num_rows($result) > 0) {
         echo "<script>alert('Admissionnumber already taken')</script>";
     } else {
+        $password = md5($password_1); //encrypt assword before saving to db
         $query = "INSERT INTO students (fullname,admission_number, email, phone_number, department, company_name, company_Contact,
         company_address,company_email, startingdate, password,created_at) 
                VALUES('$fullname','$admissionnumber', '$email','$phonenumber', '$department', '$companyname','$companycontact',
@@ -82,11 +88,4 @@ function getUserById($id)
 
     $user = mysqli_fetch_assoc($result);
     return $user;
-}
-
-// escape string
-function e($val)
-{
-    global $db;
-    return mysqli_real_escape_string($db, trim($val));
 }

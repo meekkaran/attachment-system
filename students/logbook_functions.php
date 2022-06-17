@@ -1,6 +1,6 @@
 
     <?php
-    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
     if (isset($_SESSION['user']['student_id'])) {
         $student_id = $_SESSION['user']['student_id'];
 

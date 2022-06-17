@@ -1,8 +1,8 @@
 <?php
 // variable array $db that hold each parameters necessary to connect to the database
 $db['db_host'] = "localhost";
-$db['db_user'] = "root";
-$db['db_pass'] = "meek";
+$db['db_user'] = "karan";
+$db['db_pass'] = "Karanmeek@21";
 $db['db_name'] = "dbsupervise";
 
 // foreach loop that loops through array $db to convert parameters to constants

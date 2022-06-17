@@ -1,18 +1,18 @@
 <?php
 session_start();
-include "./includes/db.php";
+include "includes/db.php";
 
 //change password
 
 if (isset($_POST['change_pwd'])) {
-    $role_id = $_POST['role_id'];
+    $email = $_POST['email'];
     $cpassword = $_POST['cpassword'];
     $password = $_POST['password'];
     $re_password = $_POST['re_password'];
 
     $cpassword = md5($cpassword);
 
-    $stmt = "SELECT * FROM lecturers WHERE role_id='$role_id' and password='$cpassword'"; #check for a user with the same username and password
+    $stmt = "SELECT * FROM trainers WHERE email='$email' and password='$cpassword'"; #check for a user with the same username and password
     $result = mysqli_query($conn, $stmt);/* execute the query */
     $rows = mysqli_num_rows($result);/* count the number of arrays returened by the query */
     if ($rows !== 1) #if current credentials are wrong
@@ -20,16 +20,14 @@ if (isset($_POST['change_pwd'])) {
         echo "<script>alert('Invalid username or password')</script>";
     } elseif ($password == $re_password) {
         $password = md5($password);
-        $sql = "UPDATE lecturers SET password='$password' WHERE role_id='$role_id' ";
+        $sql = "UPDATE trainers SET password='$password' WHERE email='$email' ";
         $query = mysqli_query($conn, $sql);
         if ($query) {
-            //insert into logs
-            $lecturer_id = $_SESSION['user']['lecturer_id'];
+            $trainer_id = $_SESSION['user']['trainer_id'];
             $date = date('Y-m-d H:i:s');
-            $stmt3 = "INSERT INTO lecturerlogs(lecturer_id,action,time) VALUES('$lecturer_id','Change password','$date')";
+            $stmt3 = "INSERT INTO trainerlogs(trainer_id,action,time) VALUES('$trainer_id','Change Password','$date')";
             $query = mysqli_query($conn, $stmt3);
-
-            echo "<script>alert('Password updated successfully');window.location = 'lecturerlogin.php'</script>";
+            echo "<script>alert('Password updated successfully');window.location = 'trainerlogin.php'</script>";
         } else {
             echo "<script>alert('Failed to Update password');window.location = 'changepassword.php'</script>";
         }
@@ -53,25 +51,28 @@ if (isset($_POST['change_pwd'])) {
         <div id="logo"> CIAMS</div>
         <?php if (isset($_SESSION['user'])) : ?>
             <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
-                </span><span style="font-family:serif"><?php echo $_SESSION['user']['lecname']; ?></span></div>
+                </span><span style="font-family:serif"><?php echo $_SESSION['user']['trainername']; ?></span></div>
         <?php endif ?>
     </div>
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-                <a class="menu_items_link" href="lecturerprofile.php">
+                <a class="menu_items_link" href="trainerprofile.php">
                     <li class="menu_items_list">My Profile</li>
                 </a>
-                <a class="menu_items_link" href="assigned.php">
-                    <li class="menu_items_list">Assigned Students</li>
+                <a class="menu_items_link" href="assignedtrainer.php">
+                    <li class="menu_items_list">Add Student</li>
                 </a>
-                <a class="menu_items_link" href="assigned.php">
-                    <li class="menu_items_list">Students' Logbooks</li>
+                <a class="menu_items_link" href="viewlogbook.php">
+                    <li class="menu_items_list">Assigned Student</li>
+                </a>
+                <a class="menu_items_link" href="">
+                    <li class="menu_items_list">Student Logbook</li>
                 </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list" style="background-color:orange;padding-left:16px">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="assigned.php?logout">
+                <a class="menu_items_link" href="changepassword.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -79,6 +80,7 @@ if (isset($_POST['change_pwd'])) {
     </div>
 
     <div class="main">
+        <h2>MY DETAILS</h2>
         <div class="heading">
             <h2>Change Password</h2>
         </div>
@@ -86,8 +88,8 @@ if (isset($_POST['change_pwd'])) {
         <form method="post" id="studentlogin" action="changepassword.php" onSubmit="return validateForm()">
 
             <div class="inputform">
-                <label>Role ID</label>
-                <input type="text" name="role_id" id="role_id">
+                <label>Email</label>
+                <input type="text" name="email" id="email">
             </div>
             <div class="inputform">
                 <label>Current Password</label>
@@ -107,12 +109,11 @@ if (isset($_POST['change_pwd'])) {
         </form>
         <script>
             function validateForm() {
-                //validate role_id
-                //if role ID is empty
-                role_id = document.getElementById("role_id").value;
-                if (role_id == "" || role_id.length < 4) {
-                    alert("Please enter your Role ID");
-                    document.getElementById("role_id").focus();
+                //validate email
+                email = document.getElementById("email").value;
+                if (email.length == 0 || email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+                    alert("You must enter a valid email");
+                    document.getElementById("email").focus();
                     return false;
                 }
                 //validating password

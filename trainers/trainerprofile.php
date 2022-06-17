@@ -1,4 +1,5 @@
 <?php
+include "./includes/db.php";
 session_start();
 //no one can access this page apart from the trainers /(security)
 if ($_SESSION['utype'] == 'trainer') {
@@ -16,14 +17,24 @@ if (isset($_GET['logout'])) {
     unset($_SESSION['user']);
     header("location: trainerlogin.php");
 }
-?>
 
+
+$email = $_SESSION['user']['email'];
+$q = mysqli_query($conn, "SELECT * FROM trainers WHERE email = '$email'");
+$row = mysqli_fetch_assoc($q);
+$trainername = $row['trainername'];
+$email = $row['email'];
+$mobile = $row['mobile'];
+$title = $row['title'];
+
+?>
 <html>
 
 <head>
     <title>Trainer</title>
     <link rel="stylesheet" href="templates/css/style1.css" />
     <link rel="stylesheet" href="templates/css/logbookstyle.css" />
+    <link rel="stylesheet" href="templates/css/style.css" />
 </head>
 
 <body>
@@ -39,10 +50,10 @@ if (isset($_GET['logout'])) {
         <div class="sidebar">
             <ul id="menu_list">
                 <a class="menu_items_link" href="trainerprofile.php">
-                    <li class="menu_items_list">My Profile</li>
+                    <li class="menu_items_list" style="background-color:orange;padding-left:16px">My Profile</li>
                 </a>
                 <a class="menu_items_link" href="assignedtrainer.php">
-                    <li class="menu_items_list" style="background-color:orange;padding-left:16px">Add Student</li>
+                    <li class="menu_items_list">Add Student</li>
                 </a>
                 <a class="menu_items_link" href="viewlogbook.php">
                     <li class="menu_items_list">Assigned Student</li>
@@ -61,36 +72,26 @@ if (isset($_GET['logout'])) {
     </div>
 
     <div class="main">
-        <div class="studentsform">
-            <h2>Enter Students Registration Number</h2>
-            <div class="formcontainer">
-                <form action="assignedtrainer.php" method="post">
-                    <label>Admission Number:</label><br>
-                    <input type="text" name="admission_number"><br>
-                    <br>
-                    <hr>
-                    <input type="submit" value="Save Changes" name="savechanges" class="savebtn" />
-                </form>
+        <form method="post" action="">
+            <h2>MY PROFILE</h2>
+            <div class="inputform">
+                <label>Trainer Full Name</label>
+                <input type="text" name="trainername" value="<?php echo $trainername ?>">
             </div>
-            <?php
-            $db = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
-            if (isset($_POST['savechanges'])) {
-                $admissionnumber = $_POST['admission_number'];
-                $query = "INSERT INTO assigned_trainer( admission_number,trainer_id) VALUES({$admissionnumber},'{$_SESSION['user']['trainer_id']}') ";
-                $create_post_query = mysqli_query($db, $query);
-                // confirmQuery($create_post_query);
-                if ($create_post_query) {
-                    echo "Valid Admission Number,Proceed to view Student logbook";
-                } else {
-                    echo "Enter A Valid Admission number";
-                }
-            }
-            ?>
-        </div>
+            <div class="inputform">
+                <label>Email</label>
+                <input type="email" name="email" value="<?php echo $email ?>">
+            </div>
+            <div class="inputform">
+                <label>Mobile</label>
+                <input type="text" name="mobile" value="<?php echo $mobile ?>">
+            </div>
+            <div class="inputform">
+                <label>Title</label>
+                <input type="text" name="title" value="<?php echo $title ?>">
+            </div>
+        </form>
     </div>
-
-    <!-- footer section -->
-
 </body>
 
 </html>

@@ -40,10 +40,19 @@
                 <a class="menu_items_link" href="studentstrainers.php">
                     <li class="menu_items_list">Students' Trainers</li>
                 </a>
+                <a class="menu_items_link" href="studentslogs.php">
+                    <li class="menu_items_list">Student Logs</li>
+                </a>
+                <a class="menu_items_link" href="lecturerlogs.php">
+                    <li class="menu_items_list">Lecturer logs</li>
+                </a>
+                <a class="menu_items_link" href="trainerlogs.php">
+                    <li class="menu_items_list">Trainer Logs</li>
+                </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="assignedlecturers.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -55,7 +64,7 @@
                 <label>Student</label>
                 <select name="student" class="sel">
                     <?php
-                    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                    $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                     $query = "SELECT * FROM students ";
                     $select_all_students = mysqli_query($db, $query);
                     // confirmQuery($select_all_categories);
@@ -69,7 +78,7 @@
                 <label>Lecturer</label>
                 <select name="lecturer" class="sel">
                     <?php
-                    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                    $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                     $query = "SELECT * FROM lecturers ";
                     $select_all_lecturers = mysqli_query($db, $query);
                     // confirmQuery($select_all_categories);
@@ -86,7 +95,7 @@
             </form>
 
             <?php
-            $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+            $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
             if (isset($_POST['save_assigned'])) {
                 $student = $_POST['student'];
                 $lecturer = $_POST['lecturer'];
@@ -122,10 +131,17 @@
                     <tbody>
                         <?php
                         // $query = "SELECT * FROM  assigned";
-                        $query = "SELECT  assigned.id,
-                        p1.fullname as student,  p2.lecname as lecturer  from assigned
-                        join students p1 on assigned.student = p1.student_id
-                        join lecturers p2 on assigned.lecturer = p2.lecturer_id";
+
+                        //                         select country_from.country_name AS country_from,
+                        // country_to.country_name AS country_to 
+                        // from flightticket 
+                        // INNER join countries country_from ON flightticket.country_from = country_from.country_id
+                        // INNER join countries country_to ON flightticket.country_to = country_to.country_id
+
+
+                        $query = "SELECT assigned.id, p1.fullname as student,  p2.lecname as lecturer  from assigned
+                        INNER join students p1 on assigned.student = p1.student_id
+                        INNER join lecturers p2 on assigned.lecturer = p2.lecturer_id";
                         $query_select_all = mysqli_query($conn, $query);
                         while ($row = mysqli_fetch_assoc($query_select_all)) {
                             $id = $row['id'];

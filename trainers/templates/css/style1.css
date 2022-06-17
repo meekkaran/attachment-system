@@ -110,3 +110,9 @@ table td {
 .adminbtn1:hover{
     background-color: orange;
 }
+/* //styling the form for submitting adm no */
+.main .studentsform .formcontainer{
+    position: absolute;
+    top:30%;
+    left:30%;
+}

@@ -2,17 +2,22 @@
 session_start();
 
 // connect to database
-$db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+$db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
 
 login();
 // LOGIN USER
 function login()
 {
-    global $db, $admissionnumber, $errors;
+    global $db, $admissionnumber;
 
-    // grap form values
-    $admissionnumber = $_POST['admissionnumber'];
-    $password = $_POST['password'];
+    // receive all input values from the form. Call the mysqli_real_escape_string() function
+    // defined below to escape form values
+    $admissionnumber    =  mysqli_real_escape_string($db, $_POST['admissionnumber']);
+    $password  =  mysqli_real_escape_string($db, $_POST['password']);
+
+    //prevent cross-site scripting
+    $admissionnumber = htmlspecialchars($admissionnumber);
+    $password = htmlspecialchars($password);
 
     $password = md5($password);
 
@@ -27,10 +32,14 @@ function login()
 
         $_SESSION['utype'] = "student";
 
+        // //INSERT INTO LOGS
+        $student_id = $_SESSION['user']['student_id'];
+        $date = date('Y-m-d H:i:s');
+        $stmt3 = "INSERT INTO studentlogs(student_id,action,time) VALUES('$student_id','Login','$date')";
+        $results = mysqli_query($db, $stmt3);
+
         header('location: logbook.php');
     } else {
-        // echo "Wrong role_id/password combination";
         echo "<script> alert('Wrong id/password combination'); window.location.href='studentlogin.php';  </script>";
     }
 }
-// }

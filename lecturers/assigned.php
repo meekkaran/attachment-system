@@ -30,17 +30,6 @@ if (isset($_GET['logout'])) {
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
         <?php if (isset($_SESSION['user'])) : ?>
-            <strong><?php echo $_SESSION['user']['lecturer_id']; ?></strong>
-
-            <small>
-                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['lecname']); ?>)</i>
-                <br>
-                <a href="home.php?logout='1'" style="color: red;">logout</a>
-                &nbsp; <a href="create_user.php"> + add user</a>
-            </small>
-
-        <?php endif ?>
-        <?php if (isset($_SESSION['user'])) : ?>
             <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
                 </span><span style="font-family:serif"><?php echo $_SESSION['user']['lecname']; ?></span></div>
         <?php endif ?>
@@ -49,8 +38,8 @@ if (isset($_GET['logout'])) {
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-                <a class="menu_items_link" href="assigned.php">
-                    <li class="menu_items_list">HOME</li>
+                <a class="menu_items_link" href="lecturerprofile.php">
+                    <li class="menu_items_list">My Profile</li>
                 </a>
                 <a class="menu_items_link" href="assigned.php">
                     <li class="menu_items_list" style="background-color:orange;padding-left:16px">Assigned Students</li>
@@ -85,14 +74,14 @@ if (isset($_GET['logout'])) {
                 <tbody id="show_data">
 
                     <?php
-                    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                    $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                     if (isset($_SESSION['user'])) {
                         $lecturer = $_SESSION['user']['lecturer_id'];
                     }
                     echo var_dump($lecturer);
 
 
-                    $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
+                    $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                     $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student WHERE lecturer={$lecturer}";
                     $res = mysqli_query($conn, $sql);
                     while ($row = mysqli_fetch_assoc($res)) {

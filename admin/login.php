@@ -1,42 +1,38 @@
-<?php include('includes/server.php') ?>
-<!DOCTYPE html>
-<html>
+<?php
+session_start();
 
-<head>
-	<title>Admin registration</title>
-	<link rel="stylesheet" type="text/css" href="templates/style.css">
-	<link rel="stylesheet" href="./templates/admin1.css" />
-</head>
+// connect to database
+$db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
 
-<body>
-	<div id="top-navigation">
-		<div id="logo"> CIAMS</div>
-		<div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp; </span><span style="font-family:serif"><?php echo "Admin" ?></span></div>
-	</div>
-	<div class="loginform">
-		<div class="heading">
-			<h2>Login</h2>
-		</div>
+login();
+// LOGIN USER
+function login()
+{
+    global $db, $username;
+    // receive all input values from the form. Call the mysqli_real_escape_string() function
+    // defined below to escape form values
+    $username    = mysqli_real_escape_string($db, $_POST['username']);
+    $password    = mysqli_real_escape_string($db, $_POST['password']);
 
-		<form method="post" action="login.php">
-			<?php include('includes/errors.php'); ?>
-			<div class="inputform">
-				<label>Username</label>
-				<input type="text" name="username">
-			</div>
-			<div class="inputform">
-				<label>Password</label>
-				<input type="password" name="password">
-			</div>
-			<div class="inputform">
-				<button type="submit" class="btn" name="login_user">Login</button>
-			</div>
-			<p>
-				<!-- Not yet a member? <a href="register.php">Sign up</a> -->
-				Go to home page <a href="../index.php">Home</a>
-			</p>
-		</form>
-	</div>
-</body>
+    //prevent cross-site scripting
+    $username = htmlspecialchars($username);
+    $password = htmlspecialchars($password);
 
-</html>
+    $password = md5($password);
+
+    $query = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
+    $results = mysqli_query($db, $query);
+
+    if (mysqli_num_rows($results) == 1) { // user found
+        $logged_in_user = mysqli_fetch_assoc($results);
+
+        $_SESSION['user'] = $logged_in_user;
+        $_SESSION['success']  = "You are now logged in";
+
+        $_SESSION['utype'] = "admin";
+
+        header('location: dashboard.php');
+    } else {
+        echo "<script> alert('Wrong id/password combination'); window.location.href='lecturerlogin.php';  </script>";
+    }
+}

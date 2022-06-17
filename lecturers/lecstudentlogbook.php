@@ -30,7 +30,7 @@ include "lec_student_logbook_function.php";
 <body>
     <?php
     //selecting week from table weeks
-    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
     $query = "SELECT * FROM tbl_weeks";
     $select_all_weeks = mysqli_query($db, $query);
     ?>
@@ -56,8 +56,8 @@ include "lec_student_logbook_function.php";
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-                <a class="menu_items_link" href="assigned.php">
-                    <li class="menu_items_list">HOME</li>
+                <a class="menu_items_link" href="lecturerprofile.php">
+                    <li class="menu_items_list">My Profile</li>
                 </a>
                 <a class="menu_items_link" href="assigned.php">
                     <li class="menu_items_list">Assigned Students</li>
@@ -68,7 +68,7 @@ include "lec_student_logbook_function.php";
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="lecturerlogin.php">
+                <a class="menu_items_link" href="lecturerlogin.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>

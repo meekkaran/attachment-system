@@ -40,10 +40,19 @@
                 <a class="menu_items_link" href="studentstrainers.php">
                     <li class="menu_items_list">Students' Trainers</li>
                 </a>
+                <a class="menu_items_link" href="studentslogs.php">
+                    <li class="menu_items_list">Student Logs</li>
+                </a>
+                <a class="menu_items_link" href="lecturerlogs.php">
+                    <li class="menu_items_list">Lecturer logs</li>
+                </a>
+                <a class="menu_items_link" href="trainerlogs.php">
+                    <li class="menu_items_list">Trainer Logs</li>
+                </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="registeredtrainers.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -138,22 +147,12 @@
                     // <tr><td>No data found!</td></tr>
 
                 }
-
-                //function to delete a lecturer 
-                if (isset($_GET['delete'])) {
-                    $lecturer_id = $_GET['delete'];
-                    $sql = "DELETE from `lecturers` where lecturer_id = {$lecturer_id}";
-                    $result = mysqli_query($conn, $sql);
-                    header('location:registeredsupervisors.php');
-                }
                 ?>
-
-
                 <tbody>
                     <?php
                     function getData($sql)
                     {
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $data = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($data) > 0) {
                             while ($row = mysqli_fetch_array($data)) {
@@ -177,7 +176,7 @@
                                 echo "<td>{$Allocated}</td>";
 
                                 echo "<td><a href='update/updatelecturers.php?update={$lecturer_id}'class='adminbtn1'>Update</a></td>";
-                                echo "<td><a href='delete.php?delete={$lecturer_id}' class='adminbtn'>Delete</a></td>";
+                                echo "<td><a href='delete/deletelecturer.php?delete={$lecturer_id}' class='adminbtn'>Delete</a></td>";
                                 echo "</tr>";
                             }
                         } else { ?>
@@ -189,16 +188,11 @@
                         }
                     }
                     ?>
+
                 </tbody>
             </table>
         </div>
-
-
     </div>
-
-
 </body>
-
-
 
 </html>

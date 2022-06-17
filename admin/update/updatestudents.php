@@ -20,7 +20,7 @@ if (isset($_POST['submit'])) {
     $admissionnumber = $_POST['admission_number'];
     $email = $_POST['email'];
     $phonenumber = $_POST['phone_number'];
-    $department = $row['department'];
+    $department = $_POST['department'];
     $companyname = $_POST['company_name'];
     $companycontact = $_POST['company_contact'];
     $companyaddress = $_POST['company_address'];
@@ -29,7 +29,8 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     $sql = "update `students` set student_id=$student_id,
-    fullname='$fullname',admission_number= '$admissionnumber', email='$email',phone_number='$phonenumber', department='$department',
+    fullname='$fullname',admission_number= '$admissionnumber', email='$email',phone_number='$phonenumber',
+     department='$department',
     company_name= '$companyname',company_contact='$companycontact', company_address='$companyaddress',
     company_email='$companyemail',startingdate='$startingdate',password='$password' where student_id = $student_id";
     $result = mysqli_query($conn, $sql);
@@ -76,7 +77,8 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="inputform">
             <label for="department">Department:</label>
-            <select name="department" value="<?php echo $department ?>">
+            <select name="department">
+                <option selected disabled><?php echo $department ?></option>
                 <option value="Mathematics and Actuarial Science">Mathematics and Actuarial Science</option>
                 <option value="Computer and Information Science">Computer and Information Science</option>
                 <option value="Community Health and Development">Community Health and Development</option>

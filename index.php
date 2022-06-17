@@ -16,7 +16,7 @@
                         <li><a href="students/studentlogin.php">Student</a></li>
                         <li><a href="lecturers/lecturerlogin.php">Lecturer</a></li>
                         <li><a href="trainers/trainerlogin.php">Trainer</a></li>
-                        <li><a href="admin/login.php">Admin</a></li>
+                        <li><a href="admin/adminlogin.php">Admin</a></li>
                     </ul>
                 </li>
             </ul>
@@ -45,11 +45,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="btn">
-        <button>MORE INFO</button>
-    </div> -->
-
 
     <!-- footer section -->
 

@@ -22,105 +22,117 @@ if (isset($_POST['submit'])) {
     }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en" class="bg-pink">
+
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>addLecturer</title>
     <link rel="stylesheet" href="../templates/admin1.css" />
     <link rel="stylesheet" type="text/css" href="../templates/style.css">
 </head>
 
 <body>
-    <div id="top-navigation">
-        <div id="logo"> CIAMS</div>
-        <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp; </span><span style="font-family:serif"><?php echo "Admin" ?></span></div>
+
+
+    <div class="heading">
+        <h2> Add A Lecturer</h2>
     </div>
 
-    <div class="admincontent">
-        <div class="sidebar">
-            <ul id="menu_list">
-                <a class="menu_items_link" href="../registeredstudents.php">
-                    <li class="menu_items_list">Registered Students</li>
-                </a>
-                <a class="menu_items_link" href="../submitreports.php">
-                    <li class="menu_items_list">Student Reports</li>
-                </a>
-                <a class="menu_items_link" href="../attachmentlogbooks.php">
-                    <li class="menu_items_list">Attachment Logbooks</li>
-                </a>
-                <a class="menu_items_link" href="../registeredsupervisors.php">
-                    <li class="menu_items_list">Registered Supervisors</li>
-                </a>
-                <a class="menu_items_link" href="../assignedlecturers.php">
-                    <li class="menu_items_list">Assign Supervisors</li>
-                </a>
-                <a class="menu_items_link" href="../registeredtrainers.php">
-                    <li class="menu_items_list">Registered Trainers</li>
-                </a>
-                <a class="menu_items_link" href="../studentstrainers.php">
-                    <li class="menu_items_list">Students' Trainers</li>
-                </a>
-                <a class="menu_items_link" href="changepassword.php">
-                    <li class="menu_items_list">Change Password</li>
-                </a>
-                <a class="menu_items_link" href="../../index.php">
-                    <li class="menu_items_list">Logout</li>
-                </a>
-            </ul>
+    <form method="post" action="addlecturer.php" onSubmit="return validateForm()">
+        <div class="inputform">
+            <label>Fullname</label>
+            <input type="text" id="lecname" name="lecname" value="">
         </div>
-        <div class="main">
-            <div class="heading">
-                <h2> Add A Lecturer</h2>
-            </div>
-
-            <form method="post" action="addlecturer.php">
-                <div class="inputform">
-                    <label>Fullname</label>
-                    <input type="text" name="lecname" value="">
-                </div>
-                <div class="inputform">
-                    <label>Role ID</label>
-                    <input type="text" name="role_id" value="">
-                </div>
-                <div class="inputform">
-                    <label>Email</label>
-                    <input type="email" name="email">
-                </div>
-                <div class="inputform">
-                    <label>Phone Number</label>
-                    <input type="text" name="phonenumber" value="">
-                </div>
-                <div class="inputform">
-                    <label for="department">Department:</label>
-                    <select name="department">
-                        <option value="Mathematics and Actuarial Science">Mathematics and Actuarial Science</option>
-                        <option value="Computer and Information Science">Computer and Information Science</option>
-                        <option value="Community Health and Development">Community Health and Development</option>
-                        <option value="Natural Sciences">Natural Sciences</option>
-                        <option value="Nursing">Nursing</option>
-                    </select>
-                </div>
-                <div class="inputform">
-                    <label>Password</label>
-                    <input type="password" name="password_1">
-                </div>
-                <div class="inputform">
-                    <label>Confirm password</label>
-                    <input type="password" name="password_2">
-                </div>
-                <div class="inputform">
-                    <button type="submit" class="btn" name="submit">Submit</button>
-                </div>
-            </form>
-
+        <div class="inputform">
+            <label>Role ID</label>
+            <input type="text" id="role_id" name="role_id" value="">
         </div>
-
-
-    </div>
+        <div class="inputform">
+            <label>Email</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div class="inputform">
+            <label>Phone Number</label>
+            <input type="text" id="phonenumber" name="phonenumber" value="">
+        </div>
+        <div class="inputform">
+            <label for="department">Department:</label>
+            <select id="department" name="department">
+                <option value="Mathematics and Actuarial Science">Mathematics and Actuarial Science</option>
+                <option value="Computer and Information Science">Computer and Information Science</option>
+                <option value="Community Health and Development">Community Health and Development</option>
+                <option value="Natural Sciences">Natural Sciences</option>
+                <option value="Nursing">Nursing</option>
+            </select>
+        </div>
+        <div class="inputform">
+            <label>Password</label>
+            <input type="password" id="password_1" name="password_1">
+        </div>
+        <div class="inputform">
+            <label>Confirm password</label>
+            <input type="password" id="password_2" name="password_2">
+        </div>
+        <div class="inputform">
+            <button type="submit" class="btn" name="submit">Submit</button>
+            <button type="submit" class="btn" name="submit"><a href="../registeredsupervisors.php">BACK</a></button>
+        </div>
+    </form>
+    <script>
+        function validateForm() {
+            //if fullname is empty
+            lecname = document.getElementById("lecname").value;
+            if (lecname == "" || lecname.length < 4) {
+                alert("Please enter your full name");
+                document.getElementById("lecname").focus();
+                return false;
+            }
+            //validate roleID
+            //if role ID is empty
+            role_id = document.getElementById("role_id").value;
+            if (role_id == "" || role_id.length < 4) {
+                alert("Please enter your Role ID");
+                document.getElementById("role_id").focus();
+                return false;
+            }
+            //validate email
+            email = document.getElementById("email").value;
+            if (email.length == 0 || email.indexOf("@") == -1 || email.indexOf(".") == -1) {
+                alert("You must enter a valid email");
+                document.getElementById("email").focus();
+                return false;
+            }
+            //if phonenumber is empty
+            phonenumber = document.getElementById("phonenumber").value;
+            if (phonenumber == "" || isNaN(phonenumber) || phonenumber.length < 8) {
+                alert("please enter valid phone number");
+                document.getElementById("phonenumber").focus();
+                return false;
+            }
+            //if department is empty
+            department = document.getElementById("department").value;
+            if (department == "") {
+                alert("please enter department");
+                ddocument.getElementById("department").focus();
+                return false;
+            }
+            //validating password1
+            password_1 = document.getElementById("password_1").value;
+            if (password_1 == "" || password_1.length < 8) {
+                alert("Password should not be empty and it should have more than 8 characters");
+                document.getElementById("password_1").focus();
+                return false;
+            }
+            //validating password2
+            password_2 = document.getElementById("password_2").value;
+            if (password_2 == "" || password_2.length < 8) {
+                alert("Password should not be empty and it should have more than 8 characters");
+                document.getElementById("password_2").focus();
+                return false;
+            }
+        }
+    </script>
 
 
 </body>

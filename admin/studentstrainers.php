@@ -37,10 +37,19 @@
                 <a class="menu_items_link" href="studentstrainers.php">
                     <li class="menu_items_list" style="background-color:orange;padding-left:16px">Students' Trainers</li>
                 </a>
+                <a class="menu_items_link" href="studentslogs.php">
+                    <li class="menu_items_list">Student Logs</li>
+                </a>
+                <a class="menu_items_link" href="lecturerlogs.php">
+                    <li class="menu_items_list">Lecturer logs</li>
+                </a>
+                <a class="menu_items_link" href="trainerlogs.php">
+                    <li class="menu_items_list">Trainer Logs</li>
+                </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="studentstrainers.php?logout?">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>

@@ -28,9 +28,6 @@
 			Not yet a member? <a href="studentregistration.php">Sign up</a><br>
 			<a href="../index.php">HOME PAGE</a>
 		</p>
-		<div style="font-size: 0.8emm;">
-			<a href="forgot_password.php">Forgot Your Password?</a>
-		</div>
 	</form>
 	<script>
 		function validateForm() {

@@ -39,10 +39,19 @@
                 <a class="menu_items_link" href="studentstrainers.php">
                     <li class="menu_items_list">Students' Trainers</li>
                 </a>
+                <a class="menu_items_link" href="studentslogs.php">
+                    <li class="menu_items_list">Student Logs</li>
+                </a>
+                <a class="menu_items_link" href="lecturerlogs.php">
+                    <li class="menu_items_list">Lecturer logs</li>
+                </a>
+                <a class="menu_items_link" href="trainerlogs.php">
+                    <li class="menu_items_list">Trainer Logs</li>
+                </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="dashboard.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -54,7 +63,7 @@
                     <div class="column">
                         <h4>REGISTERED LECTURERS</h4>
                         <?php
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query = "SELECT * FROM lecturers ORDER BY lecturer_id";
                         $query_run = mysqli_query($conn, $query);
                         $row = mysqli_num_rows($query_run);
@@ -64,7 +73,7 @@
                     <div class="column">
                         <h4>REGISTERED STUDENTS</h4>
                         <?php
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query = "SELECT * FROM students ORDER BY student_id";
                         $query_run = mysqli_query($conn, $query);
                         $row = mysqli_num_rows($query_run);
@@ -74,7 +83,7 @@
                     <div class="column">
                         <h4>REGISTERED TRAINERS</h4>
                         <?php
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query = "SELECT * FROM trainers ORDER BY trainer_id";
                         $query_run = mysqli_query($conn, $query);
                         $row = mysqli_num_rows($query_run);
@@ -87,7 +96,7 @@
                     <div class="column">
                         <h4>ALLOCATED LECTURERS</h4>
                         <?php
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query = "SELECT * FROM lecturers WHERE Allocated = 'YES'";
                         $query_run = mysqli_query($conn, $query);
                         $row = mysqli_num_rows($query_run);
@@ -97,7 +106,7 @@
                     <div class="column">
                         <h4>ALLOCATED STUDENTS</h4>
                         <?php
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query = "SELECT * FROM students WHERE Allocated = 'YES'";
                         $query_run = mysqli_query($conn, $query);
                         $row = mysqli_num_rows($query_run);
@@ -110,7 +119,7 @@
                     <div class="column">
                         <h4>UNALLOCATED LECTURERS</h4>
                         <?php
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query = "SELECT * FROM lecturers WHERE Allocated = 'NO'";
                         $query_run = mysqli_query($conn, $query);
                         $row = mysqli_num_rows($query_run);
@@ -120,7 +129,7 @@
                     <div class="column">
                         <h4>UNALLOCATED STUDENTS</h4>
                         <?php
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query = "SELECT * FROM students WHERE Allocated = 'NO'";
                         $query_run = mysqli_query($conn, $query);
                         $row = mysqli_num_rows($query_run);

@@ -16,7 +16,7 @@
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-            <a class="menu_items_link" href="dashboard.php">
+                <a class="menu_items_link" href="dashboard.php">
                     <li class="menu_items_list">Dashboard</li>
                 </a>
                 <a class="menu_items_link" href="registeredstudents.php">
@@ -40,10 +40,19 @@
                 <a class="menu_items_link" href="studentstrainers.php">
                     <li class="menu_items_list">Students' Trainers</li>
                 </a>
+                <a class="menu_items_link" href="studentslogs.php">
+                    <li class="menu_items_list">Student Logs</li>
+                </a>
+                <a class="menu_items_link" href="lecturerlogs.php">
+                    <li class="menu_items_list">Lecturer logs</li>
+                </a>
+                <a class="menu_items_link" href="trainerlogs.php">
+                    <li class="menu_items_list">Trainer Logs</li>
+                </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="registeredtrainers.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -85,7 +94,7 @@
                         echo "<td>{$title}</td>";
                         echo "<td>{$created_at}</td>";
                         echo "<td><a href='update/updatetrainers.php?update={$trainer_id}'class='adminbtn1'>Update</a></td>";
-                        echo "<td><a href='delete.php?delete={$trainer_id}'class='adminbtn'>Delete</a></td>";
+                        echo "<td><a href='delete/deletetrainer.php?delete={$trainer_id}'class='adminbtn'>Delete</a></td>";
                         echo "</tr>";
                     }
                     ?>

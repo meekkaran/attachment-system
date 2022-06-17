@@ -19,12 +19,9 @@ if (isset($_GET['logout'])) {
 include "trainer_logbook_functions.php";
 ?>
 <!DOCTYPE html>
-<html lang="en" class="bg-pink">
+
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>StudentLogbook</title>
     <link rel="stylesheet" href="templates/css/style1.css" />
     <link rel="stylesheet" href="templates/css/logbookstyle.css" />
@@ -33,7 +30,7 @@ include "trainer_logbook_functions.php";
 <body>
     <?php
     //selecting week from table weeks
-    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    $db = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
     $query = "SELECT * FROM tbl_weeks";
     $select_all_weeks = mysqli_query($db, $query);
     ?>
@@ -60,8 +57,8 @@ include "trainer_logbook_functions.php";
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
-                <a class="menu_items_link" href="assigned.php">
-                    <li class="menu_items_list">HOME</li>
+                <a class="menu_items_link" href="trainerprofile.php">
+                    <li class="menu_items_list">My Profile</li>
                 </a>
                 <a class="menu_items_link" href="assignedtrainer.php">
                     <li class="menu_items_list">Add Students</li>
@@ -138,7 +135,7 @@ include "trainer_logbook_functions.php";
                     foreach ($select_all_weeks as $key => $t) {
                         echo "<tr>";
                         echo "<td>" . $t['week_title'] . "</td>";
-                        $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
+                        $conn = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
                         $query12 = "SELECT * FROM logbookdata WHERE week_id='" . $t['week_id'] . "' AND student_id='" . $student_id . "' ";
                         $res = mysqli_query($conn, $query12);
                         $week_days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'LEC_COMMENT', 'TRAINER_COMMENT');

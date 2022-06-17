@@ -41,10 +41,19 @@
                 <a class="menu_items_link" href="studentstrainers.php">
                     <li class="menu_items_list">Students' Trainers</li>
                 </a>
+                <a class="menu_items_link" href="studentslogs.php">
+                    <li class="menu_items_list">Student Logs</li>
+                </a>
+                <a class="menu_items_link" href="lecturerlogs.php">
+                    <li class="menu_items_list">Lecturer logs</li>
+                </a>
+                <a class="menu_items_link" href="trainerlogs.php">
+                    <li class="menu_items_list">Trainer Logs</li>
+                </a>
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="registeredstudents.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>
@@ -149,7 +158,7 @@
                     <?php
                     function getData($sql)
                     {
-                        $conn = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $data = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($data) > 0) {
                             while ($row = mysqli_fetch_array($data)) {
@@ -180,7 +189,7 @@
                                 echo "<td>{$startingdate}</td>";
                                 echo "<td>{$Allocated}</td>";
                                 echo "<td><a href='update/updatestudents.php?update={$student_id}' class='adminbtn1'>Update</a></td>";
-                                echo "<td><a href='delete.php?delete={$student_id}' class='adminbtn'>Delete</a></td>";
+                                echo "<td><a href='delete/deletestudent.php?delete={$student_id}' class='adminbtn'>Delete</a></td>";
                                 echo "</tr>";
                             }
                         } else { ?>

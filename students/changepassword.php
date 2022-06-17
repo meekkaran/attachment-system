@@ -3,31 +3,38 @@ session_start();
 include "includes/db.php";
 
 //change password
+
 if (isset($_POST['change_pwd'])) {
     $admissionnumber = $_POST['admissionnumber'];
-    $c_password = $_POST['c_password'];
+    $cpassword = $_POST['cpassword'];
     $password = $_POST['password'];
     $re_password = $_POST['re_password'];
 
+    $cpassword = md5($cpassword);
 
-    $password = md5($password);
-
-    $stmt = "SELECT * FROM students WHERE admissionnumber='$admissionnumber' and password='$password'"; #check for a user with the same username and password 
+    $stmt = "SELECT * FROM students WHERE admission_number='$admissionnumber' and password='$cpassword'"; #check for a user with the same username and password
     $result = mysqli_query($conn, $stmt);/* execute the query */
     $rows = mysqli_num_rows($result);/* count the number of arrays returened by the query */
-    if ($rows != 1) #if current credentials are wrong 
+    if ($rows !== 1) #if current credentials are wrong
     {
         echo "<script>alert('Invalid username or password')</script>";
-    }
-    if ($password == $re_password) {
-        $sql = "UPDATE  students  SET password='$password' WHERE admissionnumber='$admissionnumber' ";
+    } elseif ($password == $re_password) {
+        $password = md5($password);
+        $sql = "UPDATE students SET password='$password' WHERE admission_number='$admissionnumber' ";
         $query = mysqli_query($conn, $sql);
         if ($query) {
-            echo "<script>alert('Password updated successfully');window.location='changepassword.php'</script>";
+            //INSERT INTO LOGS
+            $student_id = $_SESSION['user']['student_id'];
+            $date = date('Y-m-d H:i:s');
+            $stmt3 = "INSERT INTO studentlogs(student_id,action,time) VALUES('$student_id','Change password','$date')";
+            $result3 = mysqli_query($conn, $stmt3);
+            echo "<script>alert('Password updated successfully');window.location = 'studentlogin.php'</script>";
         } else {
-            echo "<script>alert('Failed to Update password');window.location='changepassword.php'</script>";
+            echo "<script>alert('Failed to Update password');window.location = 'changepassword.php'</script>";
         }
-    };
+    } else {
+        echo "<script>alert('The two passwords do not match');window.location = 'changepassword.php'</script>";
+    }
 };
 ?>
 
@@ -51,6 +58,9 @@ if (isset($_POST['change_pwd'])) {
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
+                <a class="menu_items_link" href="studentprofile.php">
+                    <li class="menu_items_list">My Profile</li>
+                </a>
                 <a class="menu_items_link" href="logbook.php">
                     <li class="menu_items_list">Attachment Logbook</li>
                 </a>
@@ -108,6 +118,13 @@ if (isset($_POST['change_pwd'])) {
                 if (password == "" || password.length < 8) {
                     alert("Password should not be empty and it should have more than 8 characters");
                     document.getElementById("password").focus();
+                    return false;
+                }
+                //validating repeat password
+                re_password = document.getElementById("re_password").value;
+                if (re_password == "" || re_password.length < 8) {
+                    alert("password should not be empty and it should have more than 8 characters");
+                    document.getElementById("re_password").focus();
                     return false;
                 }
             }

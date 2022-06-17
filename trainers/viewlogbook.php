@@ -26,7 +26,7 @@ if (isset($_GET['logout'])) {
 
 <body>
     <?php
-    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
     $query = "SELECT * FROM trainers WHERE trainer_id = {$_SESSION['user']['trainer_id']}";
     $query_trainer_name = mysqli_query($db, $query);
     if (mysqli_num_rows($query_trainer_name) > 0) {
@@ -44,6 +44,9 @@ if (isset($_GET['logout'])) {
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
+                <a class="menu_items_link" href="trainerprofile.php">
+                    <li class="menu_items_list">My Profile</li>
+                </a>
                 <a class="menu_items_link" href="assignedtrainer.php">
                     <li class="menu_items_list">Add Student</li>
                 </a>

@@ -2,26 +2,25 @@
 session_start();
 
 // connect to database
-$db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+$db = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
 
 // variable declaration
 $email    = "";
-$errors   = array();
 
 register();
 // REGISTER USER
 function register()
 {
     // call these variables with the global keyword to make them available in function
-    global $db, $errors, $email;
+    global $db, $email;
 
-    // receive all input values from the form. Call the e() function
-    // defined below to escape form values
-    $trainername  =  e($_POST['trainername']);
-    $email       =  e($_POST['email']);
-    $mobile    =  e($_POST['mobile']);
-    $title   =  e($_POST['title']);
-    $password_1  =  e($_POST['password_1']);
+    // receive all input values from the form. 
+    //Call the mysqli_real_escape_string defined below to escape form values
+    $trainername  =  mysqli_real_escape_string($db, $_POST['trainername']);
+    $email       =  mysqli_real_escape_string($db, $_POST['email']);
+    $mobile    =  mysqli_real_escape_string($db, $_POST['mobile']);
+    $title   =  mysqli_real_escape_string($db, $_POST['title']);
+    $password_1  =  mysqli_real_escape_string($db, $_POST['password_1']);
 
 
     //prevent cross-site scripting
@@ -29,8 +28,8 @@ function register()
     $email = htmlspecialchars($email);
     $mobile = htmlspecialchars($mobile);
     $title = htmlspecialchars($title);
-
-
+    $password_1 = htmlspecialchars($password_1);
+    
     // register user if there are no errors in the form
 
     $password = md5($password_1); //encrypt the password before saving in the database
@@ -60,12 +59,4 @@ function getUserById($id)
     $user = mysqli_fetch_assoc($result);
     return $user;
 }
-
-// escape string
-function e($val)
-{
-    global $db;
-    return mysqli_real_escape_string($db, trim($val));
-}
-
 

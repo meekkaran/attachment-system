@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 
 <head>
@@ -172,6 +172,15 @@
 				return false;
 			}
 			//making sure both passwords do match
+
+			password_1 = document.getElementById("password_1").value;
+			password_2 = document.getElementById("password_2").value;
+			if (password_1 != password_2) {
+				alert("The two passwords should match.Try Again");
+				document.getElementById("password_1").focus();
+				document.getElementById("password_2").focus();
+				return false;
+			}
 		}
 	</script>
 </body>

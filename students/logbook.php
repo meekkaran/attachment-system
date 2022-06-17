@@ -45,6 +45,9 @@ if (isset($_GET['logout'])) {
     <div class="admincontent">
         <div class="sidebar">
             <ul id="menu_list">
+                <a class="menu_items_link" href="studentprofile.php">
+                    <li class="menu_items_list">My Profile</li>
+                </a>
                 <a class="menu_items_link" href="logbook.php">
                     <li class="menu_items_list" style="background-color:orange;padding-left:16px">Attachment Logbook</li>
                 </a>
@@ -136,11 +139,11 @@ if (isset($_GET['logout'])) {
                     // if (isset($_SESSION['student_id'])) {
                     $student_id = $_SESSION['user']['student_id'];
                     // echo var_dump($student_id);
-                      // create variables from the associative array
+                    // create variables from the associative array
                     foreach ($select_all_weeks as $key => $t) {
                         echo "<tr>";
                         echo "<td>" . $t['week_title'] . "</td>";
-                        $conn = mysqli_connect("localhost", "root", "meek", "dbsupervise");
+                        $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query12 = "SELECT * FROM logbookdata WHERE week_id='" . $t['week_id'] . "' AND student_id='" . $student_id . "' ";
                         $res = mysqli_query($conn, $query12);
                         $week_days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'REMARK', 'LEC_COMMENT', 'TRAINER_COMMENT');
@@ -165,6 +168,7 @@ if (isset($_GET['logout'])) {
         </div>
     </div>
 </body>
+
 </html>
 <script>
     function myFunction() {
