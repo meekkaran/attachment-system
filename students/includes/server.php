@@ -7,9 +7,12 @@ $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
 // variable declaration
 $admissionnumber = "";
 $email    = "";
-$errors   = array();
 
-register();
+
+if (isset($_POST['register_btn'])) {
+    register();
+}
+
 
 // REGISTER USER
 function register()
@@ -45,15 +48,24 @@ function register()
     $password_2 = htmlspecialchars($password_2);
 
     //make sure both passwords do match
-    if ($_POST['password_1'] != $_POST['password_2']) {
-        echo ('The two Passwords do not match!');
+    if ($password_1 !== $password_2) {
+        echo "<script>alert('The two Passwords do not match!')</script>";
     }
 
-    // register user if there are no errors in the form
-    $sql = "SELECT * FROM students WHERE admission_number = '$admissionnumber'";
-    $result = mysqli_query($db, $sql);
-    if (mysqli_num_rows($result) > 0) {
-        echo "<script>alert('Admissionnumber already taken')</script>";
+    // first check the database to make sure 
+    // a user does not already exist with the same admissionnumber and/or email
+    $user_check_query = "SELECT * FROM students WHERE admission_number='$admissionnumber' OR email='$email' LIMIT 1";
+    $result = mysqli_query($db, $user_check_query);
+    $user = mysqli_fetch_assoc($result);
+
+    if ($user) { // if user exists
+        if ($user['admission_number'] === $admissionnumber) {
+            echo "<script>alert('admissionnumber already exists')</script>";
+        }
+
+        if ($user['email'] === $email) {
+            echo "<script>alert('Email already exists')</script>";
+        }
     } else {
         $password = md5($password_1); //encrypt assword before saving to db
         $query = "INSERT INTO students (fullname,admission_number, email, phone_number, department, company_name, company_Contact,
@@ -62,6 +74,20 @@ function register()
                '$companyaddress','$companyemail', '$startingdate', '$password',now())";
         $result2 = mysqli_query($db, $query);
     }
+
+    // // register user if there are no errors in the form
+    // $sql = "SELECT * FROM students WHERE admission_number = '$admissionnumber'";
+    // $result = mysqli_query($db, $sql);
+    // if (mysqli_num_rows($result) > 0) {
+    //     echo "<script>alert('Admissionnumber already taken')</script>";
+    // } else {
+    //     $password = md5($password_1); //encrypt assword before saving to db
+    //     $query = "INSERT INTO students (fullname,admission_number, email, phone_number, department, company_name, company_Contact,
+    //     company_address,company_email, startingdate, password,created_at) 
+    //            VALUES('$fullname','$admissionnumber', '$email','$phonenumber', '$department', '$companyname','$companycontact',
+    //            '$companyaddress','$companyemail', '$startingdate', '$password',now())";
+    //     $result2 = mysqli_query($db, $query);
+    // }
 
 
     // mysqli_query($db, $query);

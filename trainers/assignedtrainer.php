@@ -76,13 +76,22 @@ if (isset($_GET['logout'])) {
             $db = mysqli_connect("localhost", "karan", "Karanmeek@21", "dbsupervise");
             if (isset($_POST['savechanges'])) {
                 $admissionnumber = $_POST['admission_number'];
-                $query = "INSERT INTO assigned_trainer( admission_number,trainer_id) VALUES({$admissionnumber},'{$_SESSION['user']['trainer_id']}') ";
-                $create_post_query = mysqli_query($db, $query);
-                // confirmQuery($create_post_query);
-                if ($create_post_query) {
-                    echo "Valid Admission Number,Proceed to view Student logbook";
+                $trainer_id = $_SESSION['user']['trainer_id'];
+                // first check the database to make sure a user does not already exist  
+                $check_select = "SELECT * FROM `assigned_trainer` WHERE admission_number = '$admissionnumber' AND trainer_id = '$trainer_id'";
+                $result = mysqli_query($db, $check_select);
+                $numrows = mysqli_fetch_assoc($result);
+                if ($numrows > 0) {
+                    echo "Student already assigned a trainer";
                 } else {
-                    echo "Enter A Valid Admission number";
+                    $query = "INSERT INTO assigned_trainer( admission_number,trainer_id) VALUES('$admissionnumber','$trainer_id') ";
+                    $create_post_query = mysqli_query($db, $query);
+                    // confirmQuery($create_post_query);
+                    if ($create_post_query) {
+                        echo "Valid Admission Number,Proceed to view Student logbook";
+                    } else {
+                        echo "Enter A Valid Admission number";
+                    }
                 }
             }
             ?>

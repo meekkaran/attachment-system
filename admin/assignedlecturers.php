@@ -95,34 +95,45 @@
             </form>
 
             <?php
-            $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
+
             if (isset($_POST['save_assigned'])) {
+                $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                 $student = $_POST['student'];
                 $lecturer = $_POST['lecturer'];
-                $query = "INSERT INTO assigned(student, lecturer) ";
-                $query .=
-                    "VALUES({$student},'{$lecturer}') ";
-                $create_post_query = mysqli_query($db, $query);
-                if ($create_post_query) {
-                    echo "Student assigned to a lecturer successfully";
-                    // header("Location: ../registeredstudents.php");
-                } else {
-                    echo "Data error";
-                }
 
+                // first check the database to make sure a user does not already exist  
+                $check_select = "SELECT * FROM `assigned` WHERE student = '$student' AND lecturer = '$lecturer'";
+                $result = mysqli_query($db, $check_select);
+                $numrows = mysqli_fetch_assoc($result);
+                if ($numrows > 0) {
+                    echo "Student already assigned a lecturer";
+                } else {
+
+                    $query = "INSERT INTO assigned(student, lecturer) ";
+                    $query .=
+                        "VALUES({$student},'{$lecturer}') ";
+                    $create_post_query = mysqli_query($db, $query);
+                    if ($create_post_query) {
+                        echo "Student assigned to a lecturer successfully";
+                        // header("Location: ../registeredstudents.php");
+                    } else {
+                        echo "Error occurred when assigning!";
+                    }
+                }
+                //update lecturer and student table set allocated field to "yes"
                 $query2 = "UPDATE lecturers SET Allocated = 'YES' WHERE lecturer_id ='{$lecturer_id}'";
                 $result = mysqli_query($db, $query2);
                 $query3 = "UPDATE students SET Allocated = 'YES' WHERE student_id ='{$student_id}'";
                 $result1 = mysqli_query($db, $query3);
             }
             ?>
+            <!-- table displaying lecturers awith their allocated students -->
             <div class="allocated">
                 <h1>List of Lecturers with their Allocated Students</h1>
                 <table border="1" cellpadding="0">
                     <thead>
                         <tr>
                             <th>ID</th>
-
                             <th>Student Name</th>
                             <th>Lecturer Name</th>
                             <th>DELETE</th>
@@ -130,15 +141,6 @@
                     </thead>
                     <tbody>
                         <?php
-                        // $query = "SELECT * FROM  assigned";
-
-                        //                         select country_from.country_name AS country_from,
-                        // country_to.country_name AS country_to 
-                        // from flightticket 
-                        // INNER join countries country_from ON flightticket.country_from = country_from.country_id
-                        // INNER join countries country_to ON flightticket.country_to = country_to.country_id
-
-
                         $query = "SELECT assigned.id, p1.fullname as student,  p2.lecname as lecturer  from assigned
                         INNER join students p1 on assigned.student = p1.student_id
                         INNER join lecturers p2 on assigned.lecturer = p2.lecturer_id";
@@ -153,7 +155,7 @@
                             echo "<td>{$id}</td>";
                             echo "<td>{$student}</td>";
                             echo "<td>{$lecturer}</td>";
-                            echo "<td><a href='delete.php?delete={$id}'class='adminbtn'>Delete</a></td>";
+                            echo "<td><a href='delete/deleteallocated.php?delete={$id}'class='adminbtn'>Delete</a></td>";
                             echo "</tr>";
                         };
                         ?>
