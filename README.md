@@ -22,9 +22,9 @@ The main users of the system are:
      <td> AttachmentTrainers and their students</td>
   </tr>
   <tr>
-    <td><img src="![Uploading 2022-10-04 (8).png…]()" width=300 height=480></td>
-    <td><img src="![Uploading 2022-10-04 (6).png…]()" width=300 height=480></td>
-    <td><img src="![Uploading 2022-10-04 (10).png…]()" width=300 height=480></td>
+    <td><img src="![2022-10-04 (8)](https://user-images.githubusercontent.com/60463223/193882223-abb98de3-fe1a-4735-a2d0-7587ca05897e.png)" width=300 height=480></td>
+    <td><img src="" width=300 height=480></td>
+    <td><img src="" width=300 height=480></td>
   </tr>
  </table>
  
@@ -41,9 +41,9 @@ The main users of the system are:
      <td>Lecturer and Trainer Comments</td>
   </tr>
   <tr>
-    <td><img src="![2022-10-04 (18)](https://user-images.githubusercontent.com/60463223/193831223-16fc3a6c-4aee-4ffb-b1e7-0f763fd7a600.png)" width=300 height=480></td>
-    <td><img src="![Uploading 2022-10-04 (19).png…]()" width=300 height=480></td>
-    <td><img src="![Uploading 2022-10-04 (22).png…]()" width=300 height=480></td>
+    <td><img src="" width=270 height=450></td>
+    <td><img src="" width=270 height=450></td>
+    <td><img src="" width=270 height=450></td>
   </tr>
  </table>
  
@@ -59,8 +59,8 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="![Uploading 2022-10-04 (24).png…]()" width=300 height=480></td>
-    <td><img src="![Uploading 2022-10-04 (26).png…]()" width=300 height=480></td>
+    <td><img src="" width=300 height=450></td>
+    <td><img src="" width=300 height=450></td>
   </tr>
  </table>
  
@@ -76,9 +76,9 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="![2022-10-04 (18)](https://user-images.githubusercontent.com/60463223/193831462-6c138ef0-f802-4507-b4da-55e3f11e4529.png)" width=300 height=480></td>
-    <td><img src="![Uploading 2022-10-04 (19).png…]()" width=300 height=480></td>
-    <td><img src="![2022-10-04 (27)](https://user-images.githubusercontent.com/60463223/193832068-62619e11-00a2-4ef8-9173-2d8389514154.png)" width=300 height=480></td>
+    <td><img src="![traineraddadmno](https://user-images.githubusercontent.com/60463223/193850784-2e3f6936-9132-4ef2-848f-afa6842be737.png)" width=300 height=450></td>
+    <td><img src="" width=300 height=450></td>
+    <td><img src="" width=300 height=450></td>
   </tr>
  </table>
  
