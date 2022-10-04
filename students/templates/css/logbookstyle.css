@@ -1,7 +1,6 @@
 
 .nav {
     margin-top:60px;
-    /* background-color: #00cc66; */
     width: 100%;
     height: fit-content;
   }
@@ -21,7 +20,6 @@
     text-decoration: none;
     color: black;
     vertical-align: middle;
-    /* background-color: #00cc66; */
   }
   
   .nav li a:hover {
@@ -29,7 +27,6 @@
     background-color: black;
   }
   .article {
-    /* width: 80%; */
     float: left;
     height: fit-content;
   }
@@ -63,7 +60,7 @@
     color: #f0e68c;
     background-color: black;
   }
-  
+  /* text-area will not appear on the page at all unless */
   .bld {
     display: none;
   }

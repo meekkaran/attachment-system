@@ -40,7 +40,7 @@
                     entries in time for supervision and grading. </p><br /> <br />
             </div>
             <div class="info3">
-                <p>the <b>CUEA CIAMS</b> works within the univesity vision and aspires to be a regional world class centre of excellence in enhancing participation, equity, access and livelong
+                <p>the <b>CUEA CIAMS</b> works within the university vision and aspires to be a regional world class centre of excellence in enhancing participation, equity, access and livelong
                     education critical for sustainable development.</p><br />
             </div>
         </div>

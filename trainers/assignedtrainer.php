@@ -1,11 +1,5 @@
 <?php
 session_start();
-//no one can access this page apart from the trainers /(security)
-if ($_SESSION['utype'] == 'trainer') {
-} else {
-    echo "<script>alert('You must login first')</script>";
-    echo "<script>location.href'trainerlogin.php'</script>";
-}
 
 if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";

@@ -1,4 +1,21 @@
-<?php include "./includes/db.php"; ?>
+<?php include "./includes/db.php";
+session_start();
+// //no one can access this page apart from the lecturers /(security)
+// if ($_SESSION['utype'] == 'lecturer') {
+// } else {
+//     echo "<script>alert('You must login first')</script>";
+//     echo "<script>location.href'lecturerlogin.php'</script>";
+// }
+
+if (!isset($_SESSION['user'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: adminlogin.php');
+}
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['user']);
+    header("location: adminlogin.php");
+} ?>
 <html>
 
 <head>
@@ -47,9 +64,6 @@
                 </a>
                 <a class="menu_items_link" href="trainerlogs.php">
                     <li class="menu_items_list">Trainer Logs</li>
-                </a>
-                <a class="menu_items_link" href="changepassword.php">
-                    <li class="menu_items_list">Change Password</li>
                 </a>
                 <a class="menu_items_link" href="dashboard.php?logout">
                     <li class="menu_items_list">Logout</li>

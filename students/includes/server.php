@@ -47,10 +47,7 @@ function register()
     $password_1 = htmlspecialchars($password_1);
     $password_2 = htmlspecialchars($password_2);
 
-    //make sure both passwords do match
-    if ($password_1 !== $password_2) {
-        echo "<script>alert('The two Passwords do not match!')</script>";
-    }
+
 
     // first check the database to make sure 
     // a user does not already exist with the same admissionnumber and/or email
@@ -58,52 +55,41 @@ function register()
     $result = mysqli_query($db, $user_check_query);
     $user = mysqli_fetch_assoc($result);
 
-    if ($user) { // if user exists
+    if ($user  != "") { // if user exists
         if ($user['admission_number'] === $admissionnumber) {
-            echo "<script>alert('admissionnumber already exists')</script>";
+            echo "<script>alert('admissionnumber already exists');window.location='../studentregistration.php'</script>";
         }
 
         if ($user['email'] === $email) {
-            echo "<script>alert('Email already exists')</script>";
+            echo "<script>alert('Email already exists');window.location='../studentregistration.php'</script>";
         }
+    }
+    //make sure both passwords do match
+    elseif ($password_1 !== $password_2) {
+        echo "<script>alert('The two Passwords do not match!');window.location='../studentregistration.php'</script>";
     } else {
+
         $password = md5($password_1); //encrypt assword before saving to db
         $query = "INSERT INTO students (fullname,admission_number, email, phone_number, department, company_name, company_Contact,
         company_address,company_email, startingdate, password,created_at) 
                VALUES('$fullname','$admissionnumber', '$email','$phonenumber', '$department', '$companyname','$companycontact',
                '$companyaddress','$companyemail', '$startingdate', '$password',now())";
         $result2 = mysqli_query($db, $query);
+        if ($result2) {
+            echo "<script>alert('sccessfull')</script>";
+            // get id of the created user
+            $logged_in_user_id = mysqli_insert_id($db); //returns generated id of most recent query
+
+            $_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
+            $_SESSION['success']  = "You are now logged in";
+            header('location:../studentlogin.php');
+        } else {
+            echo "<script>alert('error')</script>";
+            header('location:../studentregistration.php');
+        }
     }
-
-    // // register user if there are no errors in the form
-    // $sql = "SELECT * FROM students WHERE admission_number = '$admissionnumber'";
-    // $result = mysqli_query($db, $sql);
-    // if (mysqli_num_rows($result) > 0) {
-    //     echo "<script>alert('Admissionnumber already taken')</script>";
-    // } else {
-    //     $password = md5($password_1); //encrypt assword before saving to db
-    //     $query = "INSERT INTO students (fullname,admission_number, email, phone_number, department, company_name, company_Contact,
-    //     company_address,company_email, startingdate, password,created_at) 
-    //            VALUES('$fullname','$admissionnumber', '$email','$phonenumber', '$department', '$companyname','$companycontact',
-    //            '$companyaddress','$companyemail', '$startingdate', '$password',now())";
-    //     $result2 = mysqli_query($db, $query);
-    // }
-
-
-    // mysqli_query($db, $query);
-    if ($result2) {
-        echo "<script>alert('sccessfull')</script>";
-    } else {
-        echo "<script>alert('error')</script>";
-    }
-
-    // get id of the created user
-    $logged_in_user_id = mysqli_insert_id($db); //returns generated id of most recent query
-
-    $_SESSION['user'] = getUserById($logged_in_user_id); // put logged in user in session
-    $_SESSION['success']  = "You are now logged in";
-    header('location:../studentlogin.php');
 }
+
 
 // return user array from their id
 function getUserById($id)

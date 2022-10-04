@@ -1,6 +1,22 @@
 <?php
 session_start();
 include "includes/db.php";
+//no one can access this page apart from the trainers /(security)
+if ($_SESSION['utype'] == 'trainer') {
+} else {
+    echo "<script>alert('You must login first')</script>";
+    echo "<script>location.href'trainerlogin.php'</script>";
+}
+
+if (!isset($_SESSION['user'])) {
+    $_SESSION['msg'] = "You must log in first";
+    header('location: trainerlogin.php');
+}
+if (isset($_GET['logout'])) {
+    session_destroy();
+    unset($_SESSION['user']);
+    header("location: trainerlogin.php");
+}
 
 //change password
 
@@ -80,7 +96,7 @@ if (isset($_POST['change_pwd'])) {
     </div>
 
     <div class="main">
-        <h2>MY DETAILS</h2>
+
         <div class="heading">
             <h2>Change Password</h2>
         </div>

@@ -113,6 +113,22 @@ table td {
 /* //styling the form for submitting adm no */
 .main .studentsform .formcontainer{
     position: absolute;
-    top:30%;
+    top:20%;
     left:30%;
 }
+.formcontainer input {
+    height: 30px;
+    width: 93%;
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid gray;
+  }
+ .savebtn {
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+    background: #800000;
+    border: none;
+    border-radius: 5px;
+  }

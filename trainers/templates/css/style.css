@@ -6,7 +6,7 @@
     font-size: 120%;
     background: #F8F8FF;
   }
-  
+   /* margin: top,right,bottom,left */
   .heading {
     width: 30%;
     margin: 50px auto 0px;
@@ -29,6 +29,7 @@
   .inputform {
     margin: 10px 0px 10px 0px;
   }
+  /* margin -  create space around elements */
   .inputform label {
     display: block;
     text-align: left;
@@ -50,23 +51,6 @@
     border: none;
     border-radius: 5px;
   }
-  .error {
-    width: 92%; 
-    margin: 0px auto; 
-    padding: 10px; 
-    border: 1px solid #a94442; 
-    color: #a94442; 
-    background: #f2dede; 
-    border-radius: 5px; 
-    text-align: left;
-  }
-  .success {
-    color: #3c763d; 
-    background: #dff0d8; 
-    border: 1px solid #3c763d;
-    margin-bottom: 20px;
-  }
-
 
 /* styling the button for saving student admno */
 .studentsform h2{
@@ -79,3 +63,4 @@
   font-size: 14px;
   border-radius: 5px;
 }
+ /* border-radius property defines the radius of the element's corners. */

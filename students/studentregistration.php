@@ -1,4 +1,3 @@
-
 <html>
 
 <head>
@@ -56,7 +55,7 @@
 		</div>
 		<div class="inputform">
 			<label>Starting Date</label>
-			<input type="text" id="startingdate" name="startingdate" value="">
+			<input type="date" id="startingdate" name="startingdate" value="">
 		</div>
 		<div class="inputform">
 			<label>Password</label>

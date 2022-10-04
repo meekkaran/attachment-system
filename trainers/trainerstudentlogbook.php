@@ -1,11 +1,5 @@
 <?php
 session_start();
-//no one can access this page apart from the trainers /(security)
-if ($_SESSION['utype'] == 'trainer') {
-} else {
-    echo "<script>alert('You must login first')</script>";
-    echo "<script>location.href'trainerlogin.php'</script>";
-}
 
 if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
@@ -37,17 +31,6 @@ include "trainer_logbook_functions.php";
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
         <?php if (isset($_SESSION['user'])) : ?>
-            <strong><?php echo $_SESSION['user']['trainer_id']; ?></strong>
-
-            <small>
-                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['trainername']); ?>)</i>
-                <br>
-                <a href="home.php?logout='1'" style="color: red;">logout</a>
-                &nbsp; <a href="create_user.php"> + add user</a>
-            </small>
-
-        <?php endif ?>
-        <?php if (isset($_SESSION['user'])) : ?>
             <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
                 </span><span style="font-family:serif"><?php echo $_SESSION['user']['trainername']; ?></span></div>
         <?php endif ?>
@@ -72,7 +55,7 @@ include "trainer_logbook_functions.php";
                 <a class="menu_items_link" href="changepassword.php">
                     <li class="menu_items_list">Change Password</li>
                 </a>
-                <a class="menu_items_link" href="../../index.php">
+                <a class="menu_items_link" href="trainerstudentlogbook.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>
             </ul>

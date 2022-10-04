@@ -1,11 +1,5 @@
 <?php
 session_start();
-//no one can access this page apart from the lecturers /(security)
-if ($_SESSION['utype'] == 'lecturer') {
-} else {
-    echo "<script>alert('You must login first')</script>";
-    echo "<script>location.href'lecturerlogin.php'</script>";
-}
 if (!isset($_SESSION['user'])) {
     $_SESSION['msg'] = "You must log in first";
     header('location: lecturerlogin.php');
@@ -36,17 +30,6 @@ include "lec_student_logbook_function.php";
     ?>
     <div id="top-navigation">
         <div id="logo"> CIAMS</div>
-        <?php if (isset($_SESSION['user'])) : ?>
-            <strong><?php echo $_SESSION['user']['lecturer_id']; ?></strong>
-
-            <small>
-                <i style="color: #888;">(<?php echo ucfirst($_SESSION['user']['lecname']); ?>)</i>
-                <br>
-                <a href="home.php?logout='1'" style="color: red;">logout</a>
-                &nbsp; <a href="create_user.php"> + add user</a>
-            </small>
-
-        <?php endif ?>
         <?php if (isset($_SESSION['user'])) : ?>
             <div id="student_name"><span style="color:rgb(255, 198, 0);font-size:1.1em"><em>Welcome,</em>&nbsp;
                 </span><span style="font-family:serif"><?php echo $_SESSION['user']['lecname']; ?></span></div>
@@ -101,7 +84,7 @@ include "lec_student_logbook_function.php";
                     <textarea style="width: 90%;" type="text" name="lec_coment_notes" class="form-control lec" placeholder="LECTURER COMMENTS"></textarea>
 
                     <!-- buttons -->
-                    <input type="submit" style="background-color: tomato; padding: 10px; border-radius:10px; " name="create_lec_comment" value="LEC REMARK SUBMIT" class="btn save_comment">
+                    <input type="submit" style="padding: 10px; border-radius:10px; " name="create_lec_comment" value="LEC REMARK SUBMIT" class="btn save_comment">
 
                     <hr>
                 </div>
@@ -135,6 +118,7 @@ include "lec_student_logbook_function.php";
                         $query12 = "SELECT * FROM logbookdata WHERE week_id='" . $t['week_id'] . "' AND student_id='" . $student_id . "' ";
                         $res = mysqli_query($conn, $query12);
                         $week_days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'LEC_COMMENT', 'TRAINER_COMMENT');
+                        //create a new empty array 
                         $classes = array();
                         while ($row = mysqli_fetch_assoc($res)) {
                             $classes[$row['day_title']] = $row;

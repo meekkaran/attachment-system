@@ -46,9 +46,6 @@
                 <a class="menu_items_link" href="trainerlogs.php">
                     <li class="menu_items_list">Trainer Logs</li>
                 </a>
-                <a class="menu_items_link" href="changepassword.php">
-                    <li class="menu_items_list">Change Password</li>
-                </a>
                 <a class="menu_items_link" href="studentstrainers.php?logout?">
                     <li class="menu_items_list">Logout</li>
                 </a>

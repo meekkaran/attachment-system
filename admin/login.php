@@ -33,6 +33,6 @@ function login()
 
         header('location: dashboard.php');
     } else {
-        echo "<script> alert('Wrong id/password combination'); window.location.href='lecturerlogin.php';  </script>";
+        echo "<script> alert('Wrong id/password combination'); window.location.href='adminlogin.php';  </script>";
     }
 }

@@ -28,8 +28,6 @@ function login()
         $logged_in_user = mysqli_fetch_assoc($results);
 
         $_SESSION['user'] = $logged_in_user;
-        $_SESSION['success']  = "You are now logged in";
-
         $_SESSION['utype'] = "student";
 
         // //INSERT INTO LOGS

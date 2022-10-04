@@ -50,9 +50,6 @@
                 <a class="menu_items_link" href="trainerlogs.php">
                     <li class="menu_items_list" style="background-color:orange;padding-left:16px">Trainer Logs</li>
                 </a>
-                <a class="menu_items_link" href="changepassword.php">
-                    <li class="menu_items_list">Change Password</li>
-                </a>
                 <a class="menu_items_link" href="registeredstudents.php?logout">
                     <li class="menu_items_list">Logout</li>
                 </a>

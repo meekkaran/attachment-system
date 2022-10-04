@@ -1,13 +1,7 @@
 <?php
 session_start();
-//no one can access this page apart from the lecturers /(security)
-if ($_SESSION['utype'] == 'lecturer') {
-} else {
-    echo "<script>alert('You must login first')</script>";
-    echo "<script>location.href'lecturerlogin.php'</script>";
-}
-
 if (!isset($_SESSION['user'])) {
+
     $_SESSION['msg'] = "You must log in first";
     header('location: lecturerlogin.php');
 }
@@ -78,8 +72,6 @@ if (isset($_GET['logout'])) {
                     if (isset($_SESSION['user'])) {
                         $lecturer = $_SESSION['user']['lecturer_id'];
                     }
-                    echo var_dump($lecturer);
-
 
                     $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                     $sql = "SELECT * FROM assigned LEFT JOIN students ON students.student_id=assigned.student WHERE lecturer={$lecturer}";
@@ -101,7 +93,6 @@ if (isset($_GET['logout'])) {
                         echo "<td>{$companyname}</td>";
                         echo "<td>{$companycontact}</td>";
                         echo "<td>{$companyaddress}</td>";
-                        // echo "<td><a href='categories.php?delete={$student_id}'>Delete</a></td>";
                         echo "<td><a href='lecstudentlogbook.php?edit={$student_id}'>Logbook</a></td>";
                         echo "</tr>";
                     }

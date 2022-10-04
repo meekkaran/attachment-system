@@ -115,16 +115,15 @@
                     $create_post_query = mysqli_query($db, $query);
                     if ($create_post_query) {
                         echo "Student assigned to a lecturer successfully";
-                        // header("Location: ../registeredstudents.php");
+                        //update lecturer and student table set allocated field to "yes"
+                        $query2 = "UPDATE lecturers SET Allocated = 'YES' WHERE lecturer_id ='{$lecturer_id}'";
+                        $result2 = mysqli_query($db, $query2);
+                        $query3 = "UPDATE students SET Allocated = 'YES' WHERE student_id ='{$student_id}'";
+                        $result3 = mysqli_query($db, $query3);
                     } else {
                         echo "Error occurred when assigning!";
                     }
                 }
-                //update lecturer and student table set allocated field to "yes"
-                $query2 = "UPDATE lecturers SET Allocated = 'YES' WHERE lecturer_id ='{$lecturer_id}'";
-                $result = mysqli_query($db, $query2);
-                $query3 = "UPDATE students SET Allocated = 'YES' WHERE student_id ='{$student_id}'";
-                $result1 = mysqli_query($db, $query3);
             }
             ?>
             <!-- table displaying lecturers awith their allocated students -->

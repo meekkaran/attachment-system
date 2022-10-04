@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start();//retrieves any session variable
 include "./includes/db.php";
 
 if (!isset($_SESSION['user'])) {
@@ -34,13 +34,13 @@ $companyemail = $row['company_email'];
     <link rel="stylesheet" href="templates/css/style.css">
 </head>
 <style>
-    .column {
+    .main .column {
         float: left;
         width: 100%;
     }
 
     /* Clear floats after the columns */
-    .row:after {
+    .main .row:after {
         content: "";
         display: table;
         clear: both;
@@ -82,7 +82,7 @@ $companyemail = $row['company_email'];
         <form action="studentprofile.php" method="GET">
             <div class="row">
                 <div class="column">
-                    <h2>PERSONAL DETAILS</h2>
+                    <h3>PERSONAL DETAILS</h3>
                     <div class="inputform">
                         <label>Fullname</label>
                         <input type="text" id="fullname" name="fullname" value="<?php echo $fullname ?>">
@@ -105,7 +105,7 @@ $companyemail = $row['company_email'];
                     </div>
                 </div>
                 <div class="column">
-                    <h2>COMPANY DETAILS</h2>
+                    <h3>COMPANY DETAILS</h3>
                     <div class="inputform">
                         <label>Company Name</label>
                         <input type="text" id="companyname" name="companyname" value="<?php echo $companyname ?>">

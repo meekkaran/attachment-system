@@ -3,11 +3,9 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    text-transform: capitalize;
   }
   body {
-    /* min-height: 100vh; */
-    background: url(images/back.jpg) no-repeat;
+    background: url(images/back.jpg);
     background-size: cover;
     background-position: center;
   }
@@ -63,32 +61,19 @@
     display: initial;
   }
   .maincontent{
-    /* width: 200px; */
     height: 500PX;
-    background: linear-gradient(to top, rgba(0,0,0,0.5)50%,rgba(0,0,0,0.5)50%), url(images/back.jpg);
     position: relative;
     bottom: 54px;
     background-size: cover;
     background-repeat: no-repeat;
     left: 200px;
-    /* transform: translate(0%,-5%); */
     border-radius: 10px;
     padding: 25px;
   }
   footer{
     position: relative;
   }
-  
-  /* #menu-bar {
-    display: none;
-  }
-  header label {
-    font-size: 20px;
-    color: #fff;
-    cursor: Pointer;
-    display: none;
-  } */
-  
+   
   @media (max-width: 991px) {
     header {
       padding: 20px;
@@ -118,13 +103,12 @@
   }
   
   /* styling the contents of the mainbodycontent */
+  /* border-radius:radius of the element's corners. */
   .maincontent {
     margin-top: 100px;
     margin-left: 100px;
-    /* margin-bottom: 50px; */
     width: 70%;
     background-color: gray;
-    /* padding: 30px; */
     border-radius: 10px;
     color: #fff;
   }
@@ -152,21 +136,6 @@
     background-color: yellow;
   }
   
-  /* styling the button below the main page */
-  /* .btn {
-    padding: 2%;
-    left: 30%;
-    text-align: center;
-  } */
-  
-  /* .btn button {
-    background-color: #800000;
-    color: #fff;
-    padding: 12px 22px;
-    border-radius: 10px;
-    font-size: 18px;
-  } */
-  
   /* styling the footer section */
   footer {
     box-sizing: border-box;
@@ -174,10 +143,8 @@
     width: 100%;
     background: #800000;
     color: #fff;
-    /* margin: 0;
-    padding: 0; */
   }
-  
+  /* makes the element behave like a table.  */
   .main-content {
     display: table;
     table-layout: fixed;
@@ -194,14 +161,3 @@
   .box .content {
     margin: 20px 0 0 0;
   }
-  
-  /* styling the name of a user on a dashboard */
-  /* .username{
-    margin-top: -20px;
-    color: whitesmoke;
-    float: right;
-    margin-right: 20px;
-    font-size: 1.1em;
-    font-weight: bold;
-    font-family: serif; } */
-  

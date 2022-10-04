@@ -1,3 +1,5 @@
+
+/* It removes all default margin and padding for every object on the page  */
 * {
     margin: 0px;
     padding: 0px;
@@ -6,7 +8,7 @@
     font-size: 120%;
     background: #F8F8FF;
   }
-  
+  /* margin: top,right,bottom,left */
   .heading {
     width: 30%;
     margin: 50px auto 0px;
@@ -26,6 +28,7 @@
     background: white;
     border-radius: 0px 0px 10px 10px;
   }
+ /* margin -  create space around elements */
   .inputform {
     margin: 10px 0px 10px 0px;
   }
@@ -34,6 +37,7 @@
     text-align: left;
     margin: 3px;
   }
+  /* padding:space inside an element. */
   .inputform input {
     height: 30px;
     width: 93%;
@@ -50,24 +54,8 @@
     border: none;
     border-radius: 5px;
   }
-  .error {
-    width: 92%; 
-    margin: 0px auto; 
-    padding: 10px; 
-    border: 1px solid #a94442; 
-    color: #a94442; 
-    background: #f2dede; 
-    border-radius: 5px; 
-    text-align: left;
-  }
-  .success {
-    color: #3c763d; 
-    background: #dff0d8; 
-    border: 1px solid #3c763d;
-    margin-bottom: 20px;
-  }
-
   /* form wrapper */
   .loginform{
     padding-top: 100px;
   }
+  /* border-radius property defines the radius of the element's corners. */

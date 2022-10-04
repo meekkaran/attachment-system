@@ -9,7 +9,7 @@ if ($_SESSION['utype'] == 'student') {
 include "logbook_functions.php";
 
 if (!isset($_SESSION['user'])) {
-    $_SESSION['msg'] = "You must log in first";
+    echo "<script>alert('You must login first')</script>";
     header('location: studentlogin.php');
 }
 if (isset($_GET['logout'])) {
@@ -30,7 +30,7 @@ if (isset($_GET['logout'])) {
 <body>
     <?php
     //selecting week from table weeks
-    $db = mysqli_connect('localhost', 'root', 'meek', 'dbsupervise');
+    $db = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
     $query = "SELECT * FROM tbl_weeks";
     $select_all_weeks = mysqli_query($db, $query);
     ?>
@@ -140,17 +140,20 @@ if (isset($_GET['logout'])) {
                     $student_id = $_SESSION['user']['student_id'];
                     // echo var_dump($student_id);
                     // create variables from the associative array
+                    //select all weeks as key and value
                     foreach ($select_all_weeks as $key => $t) {
                         echo "<tr>";
-                        echo "<td>" . $t['week_title'] . "</td>";
+                        echo "<td>" . $t['week_title'] . "</td>";//holds all the week title values i.e week1,week2....
                         $conn = mysqli_connect('localhost', 'karan', 'Karanmeek@21', 'dbsupervise');
                         $query12 = "SELECT * FROM logbookdata WHERE week_id='" . $t['week_id'] . "' AND student_id='" . $student_id . "' ";
                         $res = mysqli_query($conn, $query12);
                         $week_days = array('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY', 'REMARK', 'LEC_COMMENT', 'TRAINER_COMMENT');
-                        $classes = array();
+                        $classes = array();//empty barray bwaiting to store values from logbook table
                         while ($row = mysqli_fetch_assoc($res)) {
+                            //empty being assigned values
                             $classes[$row['day_title']] = $row;
                         }
+                        // looping through
                         foreach ($week_days as $day) {
                             if (array_key_exists($day, $classes)) {
                                 $row = $classes[$day];
@@ -170,7 +173,9 @@ if (isset($_GET['logout'])) {
 </body>
 
 </html>
+<!-- javascript code when you click on each input function -->
 <script>
+    //monday input
     function myFunction() {
         var x = document.getElementById("bld");
         var z = document.getElementById("hrt");
@@ -239,7 +244,7 @@ if (isset($_GET['logout'])) {
             sv5.style.display = "none";
         }
     }
-
+    //tuesday input
     function myFunction1() {
         var h = document.getElementById("thur");
         var i = document.getElementById("fri");
@@ -308,7 +313,7 @@ if (isset($_GET['logout'])) {
             sv8.style.display = "none";
         }
     }
-
+    // wednesday input
     function myFunction2() {
         var h = document.getElementById("thur");
         var i = document.getElementById("fri");
@@ -377,7 +382,7 @@ if (isset($_GET['logout'])) {
             sv8.style.display = "none";
         }
     }
-
+    // thursday input
     function myFunction3() {
         var h = document.getElementById("thur");
         var i = document.getElementById("fri");
@@ -447,7 +452,7 @@ if (isset($_GET['logout'])) {
             sv8.style.display = "none";
         }
     }
-
+    //friday input
     function myFunction4() {
         var h = document.getElementById("thur");
         var i = document.getElementById("fri");
@@ -517,7 +522,7 @@ if (isset($_GET['logout'])) {
             sv8.style.display = "none";
         }
     }
-
+    // saturday input
     function myFunction5() {
         var h = document.getElementById("thur");
         var i = document.getElementById("fri");
@@ -587,7 +592,7 @@ if (isset($_GET['logout'])) {
 
         }
     }
-
+    //students' comments input
     function myFunction6() {
         var h = document.getElementById("thur");
         var i = document.getElementById("fri");
@@ -625,7 +630,6 @@ if (isset($_GET['logout'])) {
             a.style.display = "none";
             sv2.style.display = "none";
             b.style.display = "none";
-            // d.style.display = "none";
             sv6.style.display = "none";
             c.style.display = "none";
             sv7.style.display = "none";
@@ -650,7 +654,6 @@ if (isset($_GET['logout'])) {
             b.style.display = "none";
             c.style.display = "none";
             sv7.style.display = "none";
-            // d.style.display = "none";
             sv8.style.display = "none";
             sv6.style.display = "none";
             sv3.style.display = "none";

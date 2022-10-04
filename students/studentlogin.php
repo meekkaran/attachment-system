@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 
 <head>
@@ -12,7 +11,6 @@
 	</div>
 
 	<form method="post" id="studentlogin" action="login.php" onSubmit="return validateForm()">
-
 		<div class="inputform">
 			<label>Admission Number</label>
 			<input type="text" name="admissionnumber" id="admissionnumber">
