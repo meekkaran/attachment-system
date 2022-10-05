@@ -59,8 +59,8 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="" width=300 height=450></td>
-    <td><img src="" width=300 height=450></td>
+    <td><img src="![alt text](https://github.com/meekkaran/attachment-system/tree/master/images/lecstdlist.png?raw=true)" width=300 height=450></td>
+    <td><img src="![alt text](https://github.com/meekkaran/attachment-system/tree/master/images/lecomment.png?raw=true)" width=300 height=450></td>
   </tr>
  </table>
  
