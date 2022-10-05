@@ -41,7 +41,7 @@ The main users of the system are:
      <td>Lecturer and Trainer Comments</td>
   </tr>
   <tr>
-    <td><img src="" width=270 height=450></td>
+    <td><img src="![lecstdlist](https://user-images.githubusercontent.com/60463223/194081268-d08cdcc0-181b-4b60-b3ee-5ac8be12989b.png)" width=270 height=450></td>
     <td><img src="" width=270 height=450></td>
     <td><img src="" width=270 height=450></td>
   </tr>
@@ -59,7 +59,7 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="![alt text](https://github.com/meekkaran/attachment-system/blob/master/images/lecstdlist.png?raw=true)" width=300 height=450></td>
+    <td><img src="![lecstdlist](https://user-images.githubusercontent.com/60463223/194081268-d08cdcc0-181b-4b60-b3ee-5ac8be12989b.png)" width=300 height=450></td>
     <td><img src="![alt text](https://github.com/meekkaran/attachment-system/blob/master/images/lecomment.png?raw=true)" width=300 height=450></td>
     
   </tr>
