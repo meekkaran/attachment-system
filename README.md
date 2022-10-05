@@ -22,9 +22,9 @@ The main users of the system are:
      <td> AttachmentTrainers and their students</td>
   </tr>
   <tr>
-    <td><img src="![2022-10-04 (8)](https://user-images.githubusercontent.com/60463223/193882223-abb98de3-fe1a-4735-a2d0-7587ca05897e.png)" width=300 height=480></td>
-    <td><img src="" width=300 height=480></td>
-    <td><img src="" width=300 height=480></td>
+    <td><img src="images/admingenreport.png" width=400 height=400></td>
+    <td><img src="images/" width=400 height=400></td>
+    <td><img src="images/" width=400 height=400></td>
   </tr>
  </table>
  
@@ -41,9 +41,9 @@ The main users of the system are:
      <td>Lecturer and Trainer Comments</td>
   </tr>
   <tr>
-    <td><img src="![lecstdlist](https://user-images.githubusercontent.com/60463223/194081268-d08cdcc0-181b-4b60-b3ee-5ac8be12989b.png)" width=270 height=450></td>
-    <td><img src="" width=270 height=450></td>
-    <td><img src="" width=270 height=450></td>
+    <td><img src="images/admingenreport.png" width=400 height=400></td>
+    <td><img src="images/" width=400 height=400></td>
+    <td><img src="images/" width=400 height=400></td>
   </tr>
  </table>
  
@@ -59,8 +59,8 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="![lecstdlist](https://user-images.githubusercontent.com/60463223/194081268-d08cdcc0-181b-4b60-b3ee-5ac8be12989b.png)" width=300 height=450></td>
-    <td><img src="![alt text](https://github.com/meekkaran/attachment-system/blob/master/images/lecomment.png?raw=true)" width=300 height=450></td>
+    <td><img src="images/lecstdlist.png" width=600 height=400></td>
+    <td><img src="images/leccomment.png" width=600 height=400></td>
     
   </tr>
  </table>
