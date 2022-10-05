@@ -23,8 +23,8 @@ The main users of the system are:
   </tr>
   <tr>
     <td><img src="images/admingenreport.png" width=400 height=400></td>
-    <td><img src="images/" width=400 height=400></td>
-    <td><img src="images/" width=400 height=400></td>
+    <td><img src="images/adminassign.png" width=400 height=400></td>
+    <td><img src="images/admstdtrainer.png" width=400 height=400></td>
   </tr>
  </table>
  
@@ -41,9 +41,9 @@ The main users of the system are:
      <td>Lecturer and Trainer Comments</td>
   </tr>
   <tr>
-    <td><img src="images/admingenreport.png" width=400 height=400></td>
-    <td><img src="images/" width=400 height=400></td>
-    <td><img src="images/" width=400 height=400></td>
+    <td><img src="images/stdlgbook.png" width=550 height=300></td>
+    <td><img src="images/" width=550 height=300></td>
+    <td><img src="images/stdlectrainercomment.png" width=550 height=300></td>
   </tr>
  </table>
  
@@ -59,8 +59,8 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="images/lecstdlist.png" width=600 height=400></td>
-    <td><img src="images/leccomment.png" width=600 height=400></td>
+    <td><img src="images/lecstdlist.png" width=550 height=300></td>
+    <td><img src="images/leccomment.png" width=550 height=300></td>
     
   </tr>
  </table>
@@ -77,9 +77,9 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="![traineraddadmno](https://user-images.githubusercontent.com/60463223/193850784-2e3f6936-9132-4ef2-848f-afa6842be737.png)" width=300 height=450></td>
-    <td><img src="" width=300 height=450></td>
-    <td><img src="" width=300 height=450></td>
+    <td><img src="images/traineraddadmno.png" width=550 height=300></td>
+    <td><img src="images/trainerstdlist.png" width=550 height=300></td>
+    <td><img src="images/trainercomment.png" width=550 height=300></td>
   </tr>
  </table>
  
