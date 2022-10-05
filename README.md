@@ -22,9 +22,9 @@ The main users of the system are:
      <td> AttachmentTrainers and their students</td>
   </tr>
   <tr>
-    <td><img src="images/admingenreport.png" width=400 height=400></td>
-    <td><img src="images/adminassign.png" width=400 height=400></td>
-    <td><img src="images/admstdtrainer.png" width=400 height=400></td>
+    <td><img src="images/admingenreport.png" width=600 height=300></td>
+    <td><img src="images/adminassign.png" width=600 height=300></td>
+    <td><img src="images/admstdtrainer.png" width=600 height=300></td>
   </tr>
  </table>
  
@@ -41,9 +41,9 @@ The main users of the system are:
      <td>Lecturer and Trainer Comments</td>
   </tr>
   <tr>
-    <td><img src="images/stdlgbook.png" width=550 height=300></td>
-    <td><img src="images/" width=550 height=300></td>
-    <td><img src="images/stdlectrainercomment.png" width=550 height=300></td>
+    <td><img src="images/stdlgbook.png" width=600 height=300></td>
+    <td><img src="images/stdreport.png" width=600 height=300></td>
+    <td><img src="images/stdlectrainercomment.png" width=600 height=300></td>
   </tr>
  </table>
  
@@ -77,9 +77,9 @@ The main users of the system are:
     <td>View student logbook and add comments</td>
   </tr>
   <tr>
-    <td><img src="images/traineraddadmno.png" width=550 height=300></td>
-    <td><img src="images/trainerstdlist.png" width=550 height=300></td>
-    <td><img src="images/trainercomment.png" width=550 height=300></td>
+    <td><img src="images/traineraddadmno.png" width=600 height=300></td>
+    <td><img src="images/trainerstdlist.png" width=600 height=300></td>
+    <td><img src="images/trainercomment.png" width=600 height=300></td>
   </tr>
  </table>
  
